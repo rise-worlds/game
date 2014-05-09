@@ -66,7 +66,7 @@ public:
 private:
 	time_t				m_tTime;
 	char				m_szModuleName[128];
-	int					m_nTimes;//��¼����
+	int					m_nTimes;//记录次数
 	//#endif
 private:
 	void				CreateIoHandler(LPIOHANDLER_DESC lpDesc);

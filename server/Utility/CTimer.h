@@ -9,6 +9,7 @@
 #include <windows.h>
 #endif
 
+BEGINNAMESPACE
 namespace Timer
 {
 	class COMMON_API CTime
@@ -139,5 +140,6 @@ private:
 	unsigned int		m_dwIntervalTime;
 
 };
+ENDNAMESPACE
 
 #endif // __CTimer_H__

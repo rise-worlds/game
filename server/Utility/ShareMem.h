@@ -4,6 +4,7 @@
 #ifdef _WIN32
 #include <Windows.h>
 #endif
+BEGINNAMESPACE
 namespace ShareMem
 {
 typedef	unsigned long	SM_KEY;
@@ -54,4 +55,5 @@ typedef	int	SMHandle;
 	*/
 	COMMON_API void 		CloseShareMem(SMHandle handle);
 }
+ENDNAMESPACE
 #endif

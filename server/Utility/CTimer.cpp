@@ -7,6 +7,7 @@
 #include <sys/time.h>
 #endif
 
+BEGINNAMESPACE
 using namespace Thread;
 
 namespace Timer
@@ -108,3 +109,4 @@ namespace Timer
 		return GetTime() - m_uCheckTime;
 	}
 }
+ENDNAMESPACE

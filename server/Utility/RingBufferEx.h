@@ -1,12 +1,18 @@
 #ifndef __RingBufferEx_H__
 #define __RingBufferEx_H__
+#include "CommonDefs.h"
+#include "ShareMem.h"
 #include "RingBuffer.h"
+#include <new>
+#include <stdio.h>
+
+BEGINNAMESPACE
 
 template < class T, int MAX_LEN = 1024, int EXTRA_LEN = 128 >
 class Sg_RingBufEx
 {
 public:
-	typedef Sg_RingBuffer<T, MAX_LEN, EXTRA_LEN> REAL_RINGBUF;
+	typedef RingBuffer<T, MAX_LEN, EXTRA_LEN> REAL_RINGBUF;
 	typedef REAL_RINGBUF*	REAL_RINGBUF_PTR;
 
 	Sg_RingBufEx()
@@ -216,10 +222,10 @@ public:
 
 private:
 	bool m_bIsCreate;
-	SMHandle m_pMappingFile;
+	ShareMem::SMHandle m_pMappingFile;
 	REAL_RINGBUF_PTR m_pRingBuffer_Send;	// 相对于创建方的发送Buffer 打开方的接收Buffer
 	REAL_RINGBUF_PTR m_pRingBuffer_Recv;	// 相对于创建方的接收Buffer 打开方的发送Buffer
 
 };
-
+ENDNAMESPACE
 #endif

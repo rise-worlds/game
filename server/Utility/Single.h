@@ -1,7 +1,9 @@
 #ifndef __Single_H__
 #define __Single_H__
 
-#include <assert.h>
+BEGINNAMESPACE
+#define CreateFileSingleton( type ) \
+	type the##type
 
 template<class type>
 class Single
@@ -32,5 +34,9 @@ public:
 protected:
 	static type* ms_single;
 };
+
+template<class type> type* Single<type>::ms_single = NULL;
+
+ENDNAMESPACE
 
 #endif

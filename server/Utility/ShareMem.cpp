@@ -10,6 +10,8 @@
 #endif
 
 #include <stdio.h>
+
+BEGINNAMESPACE
 namespace ShareMem
 {
 	COMMON_API SMHandle CreateShareMem(SM_KEY key, unsigned int Size)
@@ -70,3 +72,4 @@ namespace ShareMem
 	#endif
 	}
 }
+ENDNAMESPACE
