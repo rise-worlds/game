@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="FunctionGuard">
+      <UniqueIdentifier>{6205fafa-ac3a-4dcd-89f2-8a0f7497f914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FuncPerformance">
+      <UniqueIdentifier>{20c3796a-5112-4bf2-9eb3-3e850728ce9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ringbuf">
+      <UniqueIdentifier>{ebeccf5b-3571-46f9-962a-4d47b26effa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SharedMem">
+      <UniqueIdentifier>{2fc6384e-de01-438c-8134-cc8f86c8f08c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -30,19 +42,34 @@
     <ClInclude Include="Single.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="RingBuffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="RingBufferEx.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ShareMem.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="CThread.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="CTimer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystemUtil.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionGuard.h">
+      <Filter>FunctionGuard</Filter>
+    </ClInclude>
+    <ClInclude Include="StackWalker.h">
+      <Filter>FunctionGuard</Filter>
+    </ClInclude>
+    <ClInclude Include="FuncPerformanceLog.h">
+      <Filter>FuncPerformance</Filter>
+    </ClInclude>
+    <ClInclude Include="RingBufferEx.h">
+      <Filter>Ringbuf</Filter>
+    </ClInclude>
+    <ClInclude Include="RingBuffer.h">
+      <Filter>Ringbuf</Filter>
+    </ClInclude>
+    <ClInclude Include="ShareMem.h">
+      <Filter>SharedMem</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,14 +77,26 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ShareMem.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="CThread.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="CTimer.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystemUtil.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionGuard.cpp">
+      <Filter>FunctionGuard</Filter>
+    </ClCompile>
+    <ClCompile Include="StackWalker.cpp">
+      <Filter>FunctionGuard</Filter>
+    </ClCompile>
+    <ClCompile Include="FuncPerformanceLog.cpp">
+      <Filter>FuncPerformance</Filter>
+    </ClCompile>
+    <ClCompile Include="ShareMem.cpp">
+      <Filter>SharedMem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

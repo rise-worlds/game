@@ -52,6 +52,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ASIONETWORK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../../PublicLib/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -80,11 +81,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AsioNetwork.h" />
+    <ClInclude Include="CircuitQueue.h" />
+    <ClInclude Include="IoHandler.h" />
+    <ClInclude Include="NetObject.h" />
+    <ClInclude Include="RecvBuf.h" />
+    <ClInclude Include="SendBuf.h" />
+    <ClInclude Include="Session.h" />
+    <ClInclude Include="SessionList.h" />
+    <ClInclude Include="SessionPool.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AsioNetwork.cpp" />
+    <ClCompile Include="IoHandler.cpp" />
+    <ClCompile Include="NetObject.cpp" />
+    <ClCompile Include="Session.cpp" />
+    <ClCompile Include="SessionList.cpp" />
+    <ClCompile Include="SessionPool.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

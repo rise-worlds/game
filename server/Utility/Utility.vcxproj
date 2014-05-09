@@ -77,17 +77,34 @@
     <ClInclude Include="CommonDefs.h" />
     <ClInclude Include="CThread.h" />
     <ClInclude Include="CTimer.h" />
+    <ClInclude Include="FileSystemUtil.h" />
+    <ClInclude Include="FuncPerformanceLog.h" />
+    <ClInclude Include="FunctionGuard.h" />
     <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="RingBufferEx.h" />
     <ClInclude Include="ShareMem.h" />
     <ClInclude Include="Single.h" />
+    <ClInclude Include="StackWalker.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CThread.cpp" />
     <ClCompile Include="CTimer.cpp" />
+    <ClCompile Include="FileSystemUtil.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="FuncPerformanceLog.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="FunctionGuard.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="ShareMem.cpp" />
+    <ClCompile Include="StackWalker.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

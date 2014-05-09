@@ -27,12 +27,51 @@
     <ClInclude Include="AsioNetwork.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CircuitQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IoHandler.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NetObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RecvBuf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SendBuf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SessionPool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="AsioNetwork.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IoHandler.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NetObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SessionPool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
