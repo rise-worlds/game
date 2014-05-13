@@ -1,0 +1,75 @@
+###############################################################
+# File: Makefile.include
+# Desc: Global definition for "Makefile"s
+# Auth: 
+# Date: 
+###############################################################
+# Debug or Release Version?
+BUILD_FLAG:=Debug
+#BUILD_FLAG:=Release
+###############################################################
+#LIB_STLPORT:=-lstlport_gcc
+# Directory settings..
+BASEROOT_DIR:=/data/game/server
+BIN_DIR:=Bin
+LIB_DIR:=Lib
+SDK_DIR:=Inc
+
+# String tables
+STR_ARCH:=Creating archive file..
+STR_SHARED:=Creating SHARED object..
+STR_COPY:=Copying file ING...
+STR_COMPILE:=Compiling 
+STR_CLEAN:=Removing binary files..
+# Compiler.. Sometimes we need GNU C++ ext...
+# -fvtable-thunks -pg?
+CC:=g++ -ggdb -pipe -w 
+# Make tool
+MAKE:=make
+# tools to make a archive file. use "s" option, equl to ranlib.
+AR:=ar crs
+# echo
+ECHO:=echo
+# copy
+CP:=cp
+# remove
+RM:=rm
+ifeq ($(BUILD_FLAG), Debug)
+	# Options to build a module
+	CMODULE:=-D_DEBUG -c -D_VERBOSE_
+else
+	#Release??
+	# Options to build a module
+	CMODULE:=-c -D_VERBOSE_ -O2 -march=pentium4 -mfpmath=sse
+endif
+# Options to build a normal executable file.
+CFLAG:=-o
+# Make a shared object
+CFLAGDLL:=-Wl,-rpath,. -ggdb -o
+CSHARED:=-fpic -shared -o
+# options to build a "dll"
+SRC_HOME:=.
+# link with pthread lib
+LIB_PTHREAD:=-lpthread
+LIB_MYSQL:=-lmysqlclient
+LIB_DYNAMIC:=-ldl
+LIB_UTIL:=-lutil
+LIB_PYTHON:=-lpython2.4
+LIB_ODBC:=-lodbc
+
+.PHONY:clean all
+.DEFAULT:all 	
+%.o:%.cpp
+	@$(ECHO) $(STR_COMPILE): $< 
+	@$(CC) $(CMODULE) $< $(INCLUDE)
+%.o:../%.cpp
+	@$(ECHO) $(STR_COMPILE): $< 
+	@$(CC) $(CMODULE) $< $(INCLUDE)
+%.o:../../%.cpp
+	@$(ECHO) $(STR_COMPILE): $< 
+	@$(CC) $(CMODULE) $< $(INCLUDE)
+all:
+clean:
+	@$(RM) -f *.o *.a *.so	
+
+DEPENDENCIES = $(subst ../,, $(MODULES))

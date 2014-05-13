@@ -3,16 +3,23 @@ ROOT_DIR:=..
 include $(ROOT_DIR)/Makefile.include
 
 MODULES:=\
-	AsioNetwork.o \
-	IoHandler.o \
-	NetObject.o \
-	Session.o \
-	SessionList.o \
-	SessionPool.o
+	CThread.o \
+	Console.o \
+	SGLog.o \
+	FileSystemUtil.o \
+	CMemory.o \
+	CMemoryStatistic.o \
+	CSmallObject.o \
+	CTimer.o \
+	FuncPerformanceLog.o \
+	Ini.o \
+	MarkupSTL.o \
+	ShareMem.o \
+	Memory.o
 
 INCLUDE:=-I. -I..
-TARGET_LIB:=AsioNetwork.so
-DEPEND_LIB:=$(BASEROOT_DIR)/$(BIN_DIR)/$(BUILD_FLAG)/Utility.so libboost_date_time.so libboost_regex.so libboost_system.so libboost_thread.so
+TARGET_LIB:=Utility.so
+DEPEND_LIB:=
 
 all: $(TARGET_LIB)
 
