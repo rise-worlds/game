@@ -1,12 +1,12 @@
-#include "stdafx.h"
 #include "CThread.h"
 #include "assert.h"
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
 #include <sstream>
+#include <stdio.h>
 
-#if defined _WIN32
+#ifdef _WIN32
 #include <process.h>
 #endif
 
@@ -20,13 +20,14 @@
 
 using namespace std;
 
+BEGINNAMESPACE
 namespace Thread
 {
 
-	void COMMON_API SGSleep(unsigned uMiliSecond)
+	void COMMON_API Sleep(unsigned uMiliSecond)
 	{
 #ifdef _WIN32
-		Sleep(uMiliSecond);
+		::Sleep(uMiliSecond);
 #else
 		timespec ts;
 		ts.tv_sec	= uMiliSecond / 1000;
@@ -42,7 +43,7 @@ namespace Thread
 
 	//////////////////////////////////////////////////////////////////////////
 	// Thread section
-	int SGCreateThread(
+	int CreateThread(
 	    HTHREAD* phThread,
 	    unsigned long nStackSize,
 	    XTHREAD_START_ROUTINE lpStartRoutineAddress,
@@ -69,7 +70,7 @@ namespace Thread
 		return true;
 	}
 
-	void SGDetachThread(HTHREAD* phThread)
+	void DetachThread(HTHREAD* phThread)
 	{
 #ifndef _WIN32
 		pthread_detach(*phThread);
@@ -78,7 +79,7 @@ namespace Thread
 #endif
 	}
 
-	void SGExitThread(unsigned long dwExitCode)
+	void ExitThread(unsigned long dwExitCode)
 	{
 #ifndef _WIN32
 		pthread_exit(&dwExitCode);
@@ -87,7 +88,7 @@ namespace Thread
 #endif
 	}
 
-	int SGTerminateThread(HTHREAD* phThread, unsigned long dwExitCode)
+	int TerminateThread(HTHREAD* phThread, unsigned long dwExitCode)
 	{
 		int nRetCode = 0;
 
@@ -95,22 +96,22 @@ namespace Thread
 		nRetCode = pthread_cancel(*phThread);
 		nRetCode = !nRetCode;
 #else
-		nRetCode = TerminateThread(*phThread, dwExitCode);
+		nRetCode = ::TerminateThread(*phThread, dwExitCode);
 #endif
 
 		return nRetCode;
 	}
 
-	void SGGetCurrentThread(HTHREAD* phThread)
+	void GetCurrentThread(HTHREAD* phThread)
 	{
 #ifndef _WIN32
 		*phThread = pthread_self();
 #else
-		*phThread = GetCurrentThread();
+		*phThread = ::GetCurrentThread();
 #endif
 	}
 
-	int SGJoinThread(HTHREAD* phThread)
+	int JoinThread(HTHREAD* phThread)
 	{
 		int nRetCode = 0;
 
@@ -138,18 +139,18 @@ namespace Thread
 		return nRetCode;
 	}
 
-	bool COMMON_API SGSetThreadPriority(HTHREAD* phThread, int nPriority)
+	bool COMMON_API SetThreadPriority(HTHREAD* phThread, int nPriority)
 	{
 #ifndef _WIN32
 		return true;
 #else
-		return SetThreadPriority(*phThread, nPriority) != 0;
+		return ::SetThreadPriority(*phThread, nPriority) != 0;
 #endif
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// Lock section
-	int SGCreateLock(HLOCK* pLock)
+	int CreateLock(HLOCK* pLock)
 	{
 #ifndef _WIN32
 		pthread_mutexattr_t attr;
@@ -163,7 +164,7 @@ namespace Thread
 		return true;
 	}
 
-	int SGReleaseLock(HLOCK* pLock)
+	int ReleaseLock(HLOCK* pLock)
 	{
 #ifndef _WIN32
 		int nRetCode = 0;
@@ -176,7 +177,7 @@ namespace Thread
 		return true;
 	}
 
-	int SGLock(HLOCK* pLock)
+	int Lock(HLOCK* pLock)
 	{
 #ifndef _WIN32
 		pthread_mutex_lock(pLock);
@@ -186,7 +187,7 @@ namespace Thread
 		return true;
 	}
 
-	int SGUnlock(HLOCK* pLock)
+	int Unlock(HLOCK* pLock)
 	{
 #ifndef _WIN32
 		pthread_mutex_unlock(pLock);
@@ -198,7 +199,7 @@ namespace Thread
 
 	//////////////////////////////////////////////////////////////////////////
 	// Event section
-	int SGCreateEvent(
+	int CreateEvent(
 	    HEVENT* phEvent,
 	    bool bManualReset,
 	    bool bInitialState,
@@ -211,12 +212,12 @@ namespace Thread
 		phEvent->bSignaled = bInitialState;
 		phEvent->bAutoReset = bManualReset;
 #else
-		*phEvent = CreateEvent(NULL, bManualReset, bInitialState, szName);
+		*phEvent = ::CreateEvent(NULL, bManualReset, bInitialState, szName);
 #endif
 		return true;
 	}
 
-	int SGDestroyEvent(HEVENT* phEvent)
+	int DestroyEvent(HEVENT* phEvent)
 	{
 		int nRetCode = false;
 
@@ -233,7 +234,7 @@ namespace Thread
 		return nRetCode;
 	}
 
-	int SGSetEvent(HEVENT* phEvent, bool bSignalAll)
+	int SetEvent(HEVENT* phEvent, bool bSignalAll)
 	{
 		int nRetCode = 0;
 
@@ -248,13 +249,13 @@ namespace Thread
 		nRetCode = !nRetCode;
 #else
 		// In windows, unsupport broadcast??
-		nRetCode = SetEvent(*phEvent);
+		nRetCode = ::SetEvent(*phEvent);
 #endif
 
 		return nRetCode;
 	}
 
-	int SGResetEvent(HEVENT* phEvent)
+	int ResetEvent(HEVENT* phEvent)
 	{
 #ifndef _WIN32
 		if (phEvent->bAutoReset)
@@ -262,13 +263,13 @@ namespace Thread
 
 		phEvent->bSignaled = false;
 #else
-		ResetEvent(phEvent);
+		::ResetEvent(phEvent);
 #endif
 
 		return true;
 	}
 
-	int SGWaitForEvent(HEVENT* phEvent, unsigned uMilliSecond)
+	int WaitForEvent(HEVENT* phEvent, unsigned uMilliSecond)
 	{
 		//			int nRetCode = 0;
 		//
@@ -348,17 +349,17 @@ namespace Thread
 
 	//////////////////////////////////////////////////////////////////////////
 	// Semaphore section
-	int SGCreateSemaphore(HSEMAPHORE* phSemaphore, int nInitCount, int nMaxCount)
+	int CreateSemaphore(HSEMAPHORE* phSemaphore, int nInitCount, int nMaxCount)
 	{
 #ifndef _WIN32
 		sem_init(phSemaphore, 0, nInitCount);
 #else
-		*phSemaphore = CreateSemaphore(NULL, nInitCount, nMaxCount, NULL);
+		*phSemaphore = ::CreateSemaphore(NULL, nInitCount, nMaxCount, NULL);
 #endif
 		return true;
 	}
 
-	int SGPutSemaphore(HSEMAPHORE* phSemaphore)
+	int PutSemaphore(HSEMAPHORE* phSemaphore)
 	{
 #ifndef _WIN32
 		sem_post(phSemaphore);
@@ -369,7 +370,7 @@ namespace Thread
 		return true;
 	}
 
-	int SGGetSemaphore(HSEMAPHORE* phSemaphore, unsigned uMilliSecs)
+	int GetSemaphore(HSEMAPHORE* phSemaphore, unsigned uMilliSecs)
 	{
 #ifndef _WIN32
 		timeval tv;
@@ -410,7 +411,7 @@ again:
 #endif
 	}
 
-	int SGDestroySemaphore(HSEMAPHORE* phSemaphore)
+	int DestroySemaphore(HSEMAPHORE* phSemaphore)
 	{
 #ifndef _WIN32
 		sem_destroy(phSemaphore);
@@ -432,7 +433,7 @@ static unsigned int MyThreadFn(void * pt)
 
 	int rt = pthis->Run();
 
-	Thread::SGExitThread(0);
+	Thread::ExitThread(0);
 
 	return rt;
 }
@@ -446,7 +447,7 @@ IThreadInterface::~IThreadInterface(void)
 {
 	if (NULL != m_hThread)
 	{
-		//Thread::SGDetachThread( &m_hThread );
+		//Thread::DetachThread( &m_hThread );
 		m_hThread = NULL;
 	}
 }
@@ -456,6 +457,8 @@ void		IThreadInterface::StartThread(bool bSuspend)
 	assert(NULL == m_hThread);
 	if (NULL == m_hThread)
 	{
-		Thread::SGCreateThread(&m_hThread, 1024 * 1024, MyThreadFn, this);
+		Thread::CreateThread(&m_hThread, 1024 * 1024, MyThreadFn, this);
 	}
 }
+
+ENDNAMESPACE

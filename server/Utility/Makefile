@@ -3,19 +3,15 @@ ROOT_DIR:=..
 include $(ROOT_DIR)/Makefile.include
 
 MODULES:=\
-	CThread.o \
 	Console.o \
-	SGLog.o \
-	FileSystemUtil.o \
-	CMemory.o \
-	CMemoryStatistic.o \
-	CSmallObject.o \
+	CThread.o \
 	CTimer.o \
+	FileSystemUtil.o \
 	FuncPerformanceLog.o \
-	Ini.o \
+	Log.o \
 	MarkupSTL.o \
-	ShareMem.o \
-	Memory.o
+	Ini.o \
+	ShareMem.o 
 
 INCLUDE:=-I. -I..
 TARGET_LIB:=Utility.so

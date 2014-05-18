@@ -15,6 +15,7 @@
 #define		INFINITE				0
 #endif
 
+BEGINNAMESPACE
 namespace Thread
 {
 
@@ -48,44 +49,44 @@ namespace Thread
 
 #endif
 
-	void COMMON_API SGSleep(unsigned uMilliSecond);
+	void COMMON_API Sleep(unsigned uMilliSecond);
 	// Thread
 	int COMMON_API SGCreateThread(
 	    HTHREAD* phThread,
 	    unsigned long nStackSize,
 	    XTHREAD_START_ROUTINE lpStartRoutineAddress,
 	    void* lpParameter);
-	void COMMON_API SGDetachThread(HTHREAD* phThread);
-	void COMMON_API SGExitThread(unsigned long dwExitCode);
-	int COMMON_API SGTerminateThread(HTHREAD* HTHREAD, unsigned long dwExitCode);
-	void COMMON_API SGGetCurrentThread(HTHREAD* phThread);
-	int COMMON_API SGJoinThread(HTHREAD* phThread);
-	bool COMMON_API SGSetThreadPriority(HTHREAD* phThread, int nPriority);
+	void COMMON_API DetachThread(HTHREAD* phThread);
+	void COMMON_API ExitThread(unsigned long dwExitCode);
+	int COMMON_API TerminateThread(HTHREAD* HTHREAD, unsigned long dwExitCode);
+	void COMMON_API GetCurrentThread(HTHREAD* phThread);
+	int COMMON_API JoinThread(HTHREAD* phThread);
+	bool COMMON_API SetThreadPriority(HTHREAD* phThread, int nPriority);
 
 	// Lock
-	int COMMON_API SGCreateLock(HLOCK* pLock);
-	int COMMON_API SGReleaseLock(HLOCK* pLock);
+	int COMMON_API CreateLock(HLOCK* pLock);
+	int COMMON_API ReleaseLock(HLOCK* pLock);
 
-	int COMMON_API SGLock(HLOCK* pLock);
-	int COMMON_API SGUnlock(HLOCK* pLock);
+	int COMMON_API Lock(HLOCK* pLock);
+	int COMMON_API Unlock(HLOCK* pLock);
 
 	// Event
-	int COMMON_API SGCreateEvent(
+	int COMMON_API CreateEvent(
 	    HEVENT* phEvent,
 	    bool bManualReset,
 	    bool bInitialState,
 	    char* szName
 	);
-	int COMMON_API SGDestroyEvent(HEVENT* phEvent);
-	int COMMON_API SGSetEvent(HEVENT* phEvent, bool bSignalAll);
-	int COMMON_API SGResetEvent(HEVENT* phEvent);
-	int COMMON_API SGWaitForEvent(HEVENT* phEvent, unsigned uMilliSecond);
+	int COMMON_API DestroyEvent(HEVENT* phEvent);
+	int COMMON_API SetEvent(HEVENT* phEvent, bool bSignalAll);
+	int COMMON_API ResetEvent(HEVENT* phEvent);
+	int COMMON_API WaitForEvent(HEVENT* phEvent, unsigned uMilliSecond);
 
 	// Semaphore
-	int COMMON_API SGCreateSemaphore(HSEMAPHORE* phSemaphore, int nInitCount, int nMaxCount);
-	int COMMON_API SGPutSemaphore(HSEMAPHORE* phSemaphore);
-	int COMMON_API SGGetSemaphore(HSEMAPHORE* phSemaphore, unsigned uMilliSecond);
-	int COMMON_API SGDestroySemaphore(HSEMAPHORE* phSemaphore);
+	int COMMON_API CreateSemaphore(HSEMAPHORE* phSemaphore, int nInitCount, int nMaxCount);
+	int COMMON_API PutSemaphore(HSEMAPHORE* phSemaphore);
+	int COMMON_API GetSemaphore(HSEMAPHORE* phSemaphore, unsigned uMilliSecond);
+	int COMMON_API DestroySemaphore(HSEMAPHORE* phSemaphore);
 
 	class CLock
 	{
@@ -104,12 +105,12 @@ namespace Thread
 
 	inline CLock::CLock()
 	{
-		SGCreateLock(&m_Lock);
+		CreateLock(&m_Lock);
 	}
 
 	inline CLock::~CLock()
 	{
-		SGReleaseLock(&m_Lock);
+		ReleaseLock(&m_Lock);
 	}
 
 
@@ -127,12 +128,12 @@ namespace Thread
 	inline CGuard::CGuard(HLOCK* pLock)
 		: m_pLock(pLock)
 	{
-		SGLock(m_pLock);
+		Lock(m_pLock);
 	}
 
 	inline CGuard::~CGuard()
 	{
-		SGUnlock(m_pLock);
+		Unlock(m_pLock);
 	}
 
 }
@@ -156,6 +157,6 @@ public:
 private:
 	Thread::HTHREAD							m_hThread;
 };
-
+ENDNAMESPACE
 
 #endif // __CThread_H__

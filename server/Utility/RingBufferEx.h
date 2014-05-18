@@ -48,13 +48,13 @@ public:
 
 		if (bIsCreate)
 		{
-			m_pMappingFile = ShareMemAPI::CreateShareMem(nMappingName, dwSize);
+			m_pMappingFile = ShareMem::CreateShareMem(nMappingName, dwSize);
 			if (m_pMappingFile == INVALID_SM_HANDLE)
 			{
 				return false;
 			}
 
-			void* pVoid = ShareMemAPI::MapShareMem(m_pMappingFile);
+			void* pVoid = ShareMem::MapShareMem(m_pMappingFile);
 			if (pVoid == NULL)
 			{
 				return false;
@@ -69,13 +69,13 @@ public:
 		}
 		else
 		{
-			m_pMappingFile = ShareMemAPI::OpenShareMem(nMappingName, dwSize);
+			m_pMappingFile = ShareMem::OpenShareMem(nMappingName, dwSize);
 			if (m_pMappingFile == INVALID_SM_HANDLE)
 			{
 				return false;
 			}
 
-			void* pVoid = ShareMemAPI::MapShareMem(m_pMappingFile);
+			void* pVoid = ShareMem::MapShareMem(m_pMappingFile);
 			if (pVoid == NULL)
 			{
 				return false;

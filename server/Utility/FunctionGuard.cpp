@@ -25,8 +25,9 @@ extern "C" {
 #pragma intrinsic(_AddressOfReturnAddress)
 #endif  /* _X86_ */
 }
-
+#ifndef _WIN32
 #define STATUS_INVALID_PARAMETER         ((LONG)0xC000000DL)
+#endif
 
 // based on dbghelp.h
 typedef BOOL (WINAPI *MINIDUMPWRITEDUMP)(HANDLE hProcess, DWORD dwPid, HANDLE hFile, MINIDUMP_TYPE DumpType,
@@ -153,8 +154,8 @@ void CDebugInfoHelper::OnCatch()
                     break;
                 }
 
-                 MyStackWalker myStackWalker;
-                 myStackWalker.ShowCallstack();
+                MyStackWalker myStackWalker;
+                myStackWalker.ShowCallstack();
 
             } while (0);
 

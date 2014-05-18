@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "ShareMem.h"
 #if defined(_WIN32)
 #include <WinBase.h>

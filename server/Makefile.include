@@ -10,7 +10,7 @@ BUILD_FLAG:=Debug
 ###############################################################
 #LIB_STLPORT:=-lstlport_gcc
 # Directory settings..
-BASEROOT_DIR:=/data/game/server
+BASEROOT_DIR:=/data/GitHub/game/server
 BIN_DIR:=Bin
 LIB_DIR:=Lib
 SDK_DIR:=Inc

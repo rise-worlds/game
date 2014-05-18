@@ -6,6 +6,7 @@
 
 #if defined(_WIN32)
 
+#define WIN32_LEAN_AND_MEAN             //  从 Windows 头文件中排除极少使用的信息
 #pragma warning(disable: 4996)
 
 #ifndef COMMON_INCLUDE
@@ -50,7 +51,7 @@ typedef signed long long    INT64, *PINT64;
 typedef unsigned char       UINT8, *PUINT8;
 typedef unsigned short      UINT16, *PUINT16;
 typedef unsigned int        UINT32, *PUINT32;
-#ifndef _WIN32
+#ifdef _WIN32
 typedef unsigned __int64    UINT64, *PUINT64;
 #else
 typedef unsigned long long  UINT64, *PUINT64;
@@ -61,6 +62,45 @@ typedef unsigned int        DWORD32, *PDWORD32;
 typedef float               REAL32, *PREAL32;
 typedef double              REAL64, *PREAL64;
 
+#ifdef _WIN32
+#ifndef VOID
+#define VOID void
+#endif
+#else
+typedef void				VOID;
+#endif
+typedef	int					BOOL;
+typedef char				CHAR;
+typedef short				SHORT;
+typedef long				LONG;
+typedef int					INT;
+
+
+#ifndef max
+#define max(a,b)            (((a) > (b)) ? (a) : (b))
+#endif
+
+#ifndef min
+#define min(a,b)            (((a) < (b)) ? (a) : (b))
+#endif
+
+#define DF_PROPERTY(type, name)		private: \
+										type m_##name; \
+										public: \
+										type Get##name() \
+										{ return m_##name; } \
+											void Set##name(type value) \
+										{ m_##name = value;}
+
+#define MAX_PATH 260
+
+#define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=NULL; } }
+#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=NULL; } }
+#define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=NULL; } }
+
+#define M_PI (3.14159265358979323846f)
+
+#define I64FMT "%016I64X"
 
 BEGINNAMESPACE
 
@@ -193,8 +233,5 @@ inline UINT8 GetLowerUInt8(UINT16 nGuid)
 }
 
 ENDNAMESPACE
-
-#define max(a,b)    (((a) > (b)) ? (a) : (b))
-#define min(a,b)    (((a) < (b)) ? (a) : (b))
 
 #endif

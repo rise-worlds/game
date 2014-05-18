@@ -9,7 +9,6 @@
 #include <list>
 #include <vector>
 
-
 BEGINNAMESPACE
 #pragma warning(push)
 #pragma warning(disable: 4251)
@@ -79,7 +78,7 @@ public:
 	void SetFile(char *szFile)
 	{
 		//strncpy(m_szFile, szFile, sizeof(m_szFile)-1);
-		strncpy_s(m_szFile, szFile, sizeof(m_szFile)-1);
+		SafeStringCopy(m_szFile, szFile, sizeof(m_szFile));
 	}
 };
 

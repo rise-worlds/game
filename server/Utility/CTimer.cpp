@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "CTimer.h"
 #include "CThread.h"
 #include <time.h>
@@ -7,8 +6,9 @@
 #include <sys/time.h>
 #endif
 
+using namespace Common::Thread;
+
 BEGINNAMESPACE
-using namespace Thread;
 
 namespace Timer
 {
