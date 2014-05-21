@@ -75,14 +75,25 @@ typedef short				SHORT;
 typedef long				LONG;
 typedef int					INT;
 
+#ifdef _WIN32	// min & max
 
 #ifndef max
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
+#define max(a, b)	(((a) > (b)) ? (a) : (b))
 #endif
 
 #ifndef min
-#define min(a,b)            (((a) < (b)) ? (a) : (b))
+#define min(a, b)	(((a) < (b)) ? (a) : (b))
 #endif
+
+#else
+
+template<class T>
+inline T max(T a, T b) {return (a < b) ? a : b;}
+
+template<class T>
+inline T min(T a, T b) {return (a > b) ? a : b;}
+
+#endif // min & max
 
 #define DF_PROPERTY(type, name)		private: \
 										type m_##name; \

@@ -79,6 +79,7 @@ Runtime/
 VS2005/
 *.rar
 *.log
+*.o
 
 
 
