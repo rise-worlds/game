@@ -62,8 +62,7 @@ namespace Thread
 #else
 		unsigned ThreadID;
 		*phThread = (HANDLE)_beginthreadex(0, nStackSize, lpStartRoutineAddress, lpParameter, 0, &ThreadID);
-		//*phThread = CreateThread(NULL, nStackSize, lpStartRoutineAddress,
-		//	lpParameter, 0, lpThreadID);
+		//*phThread = ::CreateThread(NULL, nStackSize, lpStartRoutineAddress, lpParameter, 0, lpThreadID);
 		if (*phThread == NULL)
 			return false;
 #endif

@@ -1,4 +1,4 @@
-#ifndef __FuncPerformanceLog_H__
+﻿#ifndef __FuncPerformanceLog_H__
 #define __FuncPerformanceLog_H__
 
 #include "CommonDefs.h"

@@ -45,8 +45,8 @@ endif
 # Options to build a normal executable file.
 CFLAG:=-o
 # Make a shared object
-CFLAGDLL:=-Wl,-rpath,. -ggdb -o
-CSHARED:=-fpic -shared -o
+CFLAGDLL:=-Wl,-rpath,. -ggdb
+CSHARED:=-fPIC -shared
 # options to build a "dll"
 SRC_HOME:=.
 # link with pthread lib

@@ -1,4 +1,4 @@
-#ifndef __CTimer_H__
+﻿#ifndef __CTimer_H__
 #define __CTimer_H__
 
 #include "CommonDefs.h"
@@ -26,7 +26,7 @@ namespace Timer
 	};
 
 
-	class COMMON_API CTimeCheckPoint//毫秒为单位
+	class COMMON_API CTimeCheckPoint // 毫秒为单位
 	{
 	private:
 		unsigned	m_uCheckTime;

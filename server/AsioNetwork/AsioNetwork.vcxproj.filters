@@ -21,9 +21,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="AsioNetwork.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -74,5 +71,8 @@
     <ClCompile Include="SessionPool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
   </ItemGroup>
 </Project>

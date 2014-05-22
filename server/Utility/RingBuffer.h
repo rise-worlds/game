@@ -1,4 +1,4 @@
-#ifndef __RingBuffer_H__
+﻿#ifndef __RingBuffer_H__
 #define __RingBuffer_H__
 
 template<class T, int MAX_LEN = 1024, int EXTRA_LEN = 128>

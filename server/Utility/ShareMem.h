@@ -1,4 +1,4 @@
-#ifndef __ShareMem_H__
+﻿#ifndef __ShareMem_H__
 #define __ShareMem_H__
 #include "CommonDefs.h"
 #ifdef _WIN32

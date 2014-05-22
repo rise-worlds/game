@@ -1,4 +1,4 @@
-#ifndef __RingBufferEx_H__
+﻿#ifndef __RingBufferEx_H__
 #define __RingBufferEx_H__
 #include "CommonDefs.h"
 #include "ShareMem.h"

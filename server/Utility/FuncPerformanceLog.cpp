@@ -1,4 +1,4 @@
-#include "FuncPerformanceLog.h"
+ï»¿#include "FuncPerformanceLog.h"
 #include "CTimer.h"
 #include <stdio.h>
 #include <time.h>
@@ -37,7 +37,7 @@ void CFuncPerformanceLog::WriteLog()
 	if (!fp)
 		return;
 
-	fprintf(fp, "Ê±¼ä:%s", strTime.c_str());
+	fprintf(fp, "æ—¶é—´:%s", strTime.c_str());
 
 #ifdef _DEBUG
 	fprintf(fp, "\n\nDebug version\r\n");
@@ -50,7 +50,7 @@ void CFuncPerformanceLog::WriteLog()
 	fprintf(fp, "Total:%d\r\n", (INT32)(fTotal * 1000));
 	mapPeriod::iterator it;
 	fprintf(fp, "functions performance log:\r\n");
-	fprintf(fp, "|%-30s|%-11s|%-11s|%-15s|%-12s|\r\n", "¹¦ÄÜ", "»¨·ÑÊ±¼ä", "µ÷ÓÃ´ÎÊı", "Æ½¾ùµ÷ÓÃÊ±¼ä", "×Ü°Ù·Ö±È");
+	fprintf(fp, "|%-30s|%-11s|%-11s|%-15s|%-12s|\r\n", "åŠŸèƒ½", "èŠ±è´¹æ—¶é—´", "è°ƒç”¨æ¬¡æ•°", "å¹³å‡è°ƒç”¨æ—¶é—´", "æ€»ç™¾åˆ†æ¯”");
 	for (it = m_map.begin() ; it != m_map.end(); it ++)
 	{
 		CMyString s = (*it).first;;
