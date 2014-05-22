@@ -26,7 +26,7 @@ namespace Timer
 	};
 
 
-	class COMMON_API CTimeCheckPoint//ºÁÃëÎªµ¥Î»
+	class COMMON_API CTimeCheckPoint//æ¯«ç§’ä¸ºå•ä½
 	{
 	private:
 		unsigned	m_uCheckTime;
@@ -51,7 +51,7 @@ public:
 
 public:
 
-	// ÉèÖÃ¼ä¸ô
+	// è®¾ç½®é—´éš”
 	inline void SetTimer(unsigned int dwIntervalTime)
 	{
 		m_dwIntervalTime	= dwIntervalTime;

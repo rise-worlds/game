@@ -18,7 +18,7 @@ public:
 		m_nReadPos = 0;
 		m_nWritePos = 0;
 	}
-	// ×î¶à¶Á¸öÊı
+	// æœ€å¤šè¯»ä¸ªæ•°
 	int GetMaxReadSize()
 	{
 		int nReadSize = 0;
@@ -36,7 +36,7 @@ public:
 		return nReadSize;
 	}
 
-	// ×î¶àĞ´¸öÊı
+	// æœ€å¤šå†™ä¸ªæ•°
 	int GetMaxWriteSize()
 	{
 		int nWriteSize = 0;
@@ -54,7 +54,7 @@ public:
 		return nWriteSize - 1;
 	}
 
-	// È¡¶ÁÖ¸Õë
+	// å–è¯»æŒ‡é’ˆ
 	void GetReadPtr(T*& pPtr, int& nMaxReadSize)
 	{
 		nMaxReadSize = GetMaxReadSize() < EXTRA_LEN ? GetMaxReadSize() : EXTRA_LEN;
@@ -74,13 +74,13 @@ public:
 		pPtr = pReadPtr;
 	}
 
-	// È¡Ğ´Ö¸Õë
+	// å–å†™æŒ‡é’ˆ
 	void GetWritePtr(T*& pPtr, int& nMaxWriteSize)
 	{
 		int	nTempReadPos = m_nReadPos;
 		int	nTempWritePos = m_nWritePos;
 
-		if ((nTempWritePos + 1) % MAX_LEN == nTempReadPos)	// ¶ÓÁĞÂú
+		if ((nTempWritePos + 1) % MAX_LEN == nTempReadPos)	// é˜Ÿåˆ—æ»¡
 		{
 			nMaxWriteSize = 0;
 			pPtr = NULL;
@@ -107,7 +107,7 @@ public:
 		pPtr = m_RingBuffer + nTempWritePos;
 	}
 
-	// Ìí¼ÓÊı¾İ
+	// æ·»åŠ æ•°æ®
 	bool PushData(T* pData, int nLength = 1)
 	{
 		if (pData == NULL || nLength > GetMaxWriteSize())
@@ -138,10 +138,10 @@ public:
 		return true;
 	}
 
-	// È¡³ö²¢É¾³ıÊı¾İ
+	// å–å‡ºå¹¶åˆ é™¤æ•°æ®
 	bool PopData(T* pData, int nLength = 1)
 	{
-		if (pData == NULL || nLength > GetMaxReadSize())		//²»¹»¶Á
+		if (pData == NULL || nLength > GetMaxReadSize())		//ä¸å¤Ÿè¯»
 		{
 			return false;
 		}
@@ -169,10 +169,10 @@ public:
 		return true;
 	}
 
-	// ²é¿´Êı¾İ ²»É¾³ı
+	// æŸ¥çœ‹æ•°æ® ä¸åˆ é™¤
 	bool PeekData(T* pData, int nLen)
 	{
-		if (nLen > GetMaxReadSize())		//²»¹»¶Á
+		if (nLen > GetMaxReadSize())		//ä¸å¤Ÿè¯»
 		{
 			return false;
 		}
@@ -195,10 +195,10 @@ public:
 		return true;
 	}
 
-	// É¾³ıÊı¾İ
+	// åˆ é™¤æ•°æ®
 	bool DeleteData(int nLen)
 	{
-		if (nLen > GetMaxReadSize())		//²»¹»¶Á
+		if (nLen > GetMaxReadSize())		//ä¸å¤Ÿè¯»
 		{
 			return false;
 		}
@@ -221,7 +221,7 @@ public:
 		return true;
 	}
 
-	// Ìí¼ÓÊı¾İ
+	// æ·»åŠ æ•°æ®
 	bool AddData(int nLength = 1)
 	{
 		if (nLength > GetMaxWriteSize())

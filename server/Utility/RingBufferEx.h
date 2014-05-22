@@ -40,7 +40,7 @@ public:
 		m_pMappingFile = INVALID_SM_HANDLE;
 	}
 
-	// ´´½¨»òÕß´ò¿ªÒ»¸öÍ¨ĞÅ»á»°
+	// åˆ›å»ºæˆ–è€…æ‰“å¼€ä¸€ä¸ªé€šä¿¡ä¼šè¯
 	bool Create(int nMappingName, bool bIsCreate)
 	{
 		m_bIsCreate = bIsCreate;
@@ -92,7 +92,7 @@ public:
 		return true;
 	}
 
-	// ÏòÁíÒ»·½·¢ËÍÊı¾İ
+	// å‘å¦ä¸€æ–¹å‘é€æ•°æ®
 	void PushData(char* pMsg, int nMsgLen)
 	{
 		REAL_RINGBUF_PTR pRingBuffer = NULL;
@@ -159,7 +159,7 @@ public:
 	}
 
 
-	// È¡¶ÁÊı¾İÖ¸Õë
+	// å–è¯»æ•°æ®æŒ‡é’ˆ
 	void PopData(char*& pMsgPtr, int& nMsgLen)
 	{
 		REAL_RINGBUF_PTR pRingBuffer = NULL;
@@ -199,7 +199,7 @@ public:
 		nMsgLen = wMsgSize;
 	}
 
-	// Íê³É¶ÁÊı¾İ
+	// å®Œæˆè¯»æ•°æ®
 	void CompletePop(int nMsgLen)
 	{
 		REAL_RINGBUF_PTR pRingBuffer = NULL;
@@ -223,8 +223,8 @@ public:
 private:
 	bool m_bIsCreate;
 	ShareMem::SMHandle m_pMappingFile;
-	REAL_RINGBUF_PTR m_pRingBuffer_Send;	// Ïà¶ÔÓÚ´´½¨·½µÄ·¢ËÍBuffer ´ò¿ª·½µÄ½ÓÊÕBuffer
-	REAL_RINGBUF_PTR m_pRingBuffer_Recv;	// Ïà¶ÔÓÚ´´½¨·½µÄ½ÓÊÕBuffer ´ò¿ª·½µÄ·¢ËÍBuffer
+	REAL_RINGBUF_PTR m_pRingBuffer_Send;	// ç›¸å¯¹äºåˆ›å»ºæ–¹çš„å‘é€Buffer æ‰“å¼€æ–¹çš„æ¥æ”¶Buffer
+	REAL_RINGBUF_PTR m_pRingBuffer_Recv;	// ç›¸å¯¹äºåˆ›å»ºæ–¹çš„æ¥æ”¶Buffer æ‰“å¼€æ–¹çš„å‘é€Buffer
 
 };
 ENDNAMESPACE

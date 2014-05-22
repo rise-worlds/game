@@ -77,7 +77,7 @@ void CDebugInfoHelper::OnCatch()
     try
     {
         unsigned int nBugIndex = 0;
-        // ÅĞ¶ÏÊÇ·ñÒÑ¾­´æÔÚµÄBUG
+        // åˆ¤æ–­æ˜¯å¦å·²ç»å­˜åœ¨çš„BUG
 		try
         {
             MyStackWalker myStackWalker;
@@ -93,7 +93,7 @@ void CDebugInfoHelper::OnCatch()
 
             if (nBugIndex >= m_vecExistStackAddr.size())
             {
-                //¡¡ÊÇĞÂÎÊÌâ
+                //ã€€æ˜¯æ–°é—®é¢˜
                 m_vecExistStackAddr.push_back(std::make_pair(myStackWalker.vStackInfoIndex, std::make_pair(int(nBugIndex), 1)));
             }
             else
@@ -107,7 +107,7 @@ void CDebugInfoHelper::OnCatch()
 			
 		}
 
-        // ¸ü¸Ä¹¤×÷Ä¿Â¼
+        // æ›´æ”¹å·¥ä½œç›®å½•
         const char* pszDir = m_strPath.c_str();
 
         char szLogDirectory[MAX_PATH] = {0};
@@ -142,7 +142,7 @@ void CDebugInfoHelper::OnCatch()
         CreateDir(szLogDirectory);
         ChangeDir(szLogDirectory);
 
-        // ¼ÇÂ¼¶ÑÕ»ĞÅÏ¢
+        // è®°å½•å †æ ˆä¿¡æ¯
         try
         {
             do 
@@ -170,7 +170,7 @@ void CDebugInfoHelper::OnCatch()
 
         }
 
-        // ¼ÇÂ¼³ÌĞòĞÅÏ¢
+        // è®°å½•ç¨‹åºä¿¡æ¯
         try
         {
             do 
@@ -182,7 +182,7 @@ void CDebugInfoHelper::OnCatch()
                     break;
                 }
 
-                fprintf(m_pFile, "µ±Ç°³ÌĞò°æ±¾:0x%08X\n", m_nVer);
+                fprintf(m_pFile, "å½“å‰ç¨‹åºç‰ˆæœ¬:0x%08X\n", m_nVer);
 
                 MEMORYSTATUS memstatus;
                 memset(&memstatus, 0, sizeof(memstatus));
@@ -191,13 +191,13 @@ void CDebugInfoHelper::OnCatch()
                 GlobalMemoryStatus(&memstatus);
                 SIZE_T dwUseVirtual = memstatus.dwTotalVirtual - memstatus.dwAvailVirtual;
                 SIZE_T dwUsePhys = memstatus.dwTotalPhys - memstatus.dwAvailPhys;
-                fprintf(m_pFile, "µ±Ç°ĞéÄâÄÚ´æ×ÜÊı:[%d]Byte\t[%.2f]M\n", memstatus.dwTotalVirtual, memstatus.dwTotalVirtual/1024.0f/1024.0f);
-                fprintf(m_pFile, "µ±Ç°¿ÉÓÃĞéÄâÄÚ´æ×ÜÊı:[%d]Byte\t[%.2f]M\n", memstatus.dwAvailVirtual, memstatus.dwAvailVirtual/1024.0f/1024.0f);
-                fprintf(m_pFile, "µ±Ç°ÒÑÓÃĞéÄâÄÚ´æ×ÜÊı:[%d]Byte\t[%.2f]M\n", dwUseVirtual, dwUseVirtual/1024.0f/1024.0f);
+                fprintf(m_pFile, "å½“å‰è™šæ‹Ÿå†…å­˜æ€»æ•°:[%d]Byte\t[%.2f]M\n", memstatus.dwTotalVirtual, memstatus.dwTotalVirtual/1024.0f/1024.0f);
+                fprintf(m_pFile, "å½“å‰å¯ç”¨è™šæ‹Ÿå†…å­˜æ€»æ•°:[%d]Byte\t[%.2f]M\n", memstatus.dwAvailVirtual, memstatus.dwAvailVirtual/1024.0f/1024.0f);
+                fprintf(m_pFile, "å½“å‰å·²ç”¨è™šæ‹Ÿå†…å­˜æ€»æ•°:[%d]Byte\t[%.2f]M\n", dwUseVirtual, dwUseVirtual/1024.0f/1024.0f);
 
-                fprintf(m_pFile, "µ±Ç°ÎïÀíÄÚ´æ×ÜÊı:[%d]Byte\t[%.2f]M\n", memstatus.dwTotalPhys, memstatus.dwTotalPhys/1024.0f/1024.0f);
-                fprintf(m_pFile, "µ±Ç°¿ÉÓÃÎïÀíÄÚ´æ×ÜÊı:[%d]Byte\t[%.2f]M\n", memstatus.dwAvailPhys, memstatus.dwAvailPhys/1024.0f/1024.0f);
-                fprintf(m_pFile, "µ±Ç°ÒÑÓÃÎïÀíÄÚ´æ×ÜÊı:[%d]Byte\t[%.2f]M\n", dwUsePhys, dwUsePhys/1024.0f/1024.0f);
+                fprintf(m_pFile, "å½“å‰ç‰©ç†å†…å­˜æ€»æ•°:[%d]Byte\t[%.2f]M\n", memstatus.dwTotalPhys, memstatus.dwTotalPhys/1024.0f/1024.0f);
+                fprintf(m_pFile, "å½“å‰å¯ç”¨ç‰©ç†å†…å­˜æ€»æ•°:[%d]Byte\t[%.2f]M\n", memstatus.dwAvailPhys, memstatus.dwAvailPhys/1024.0f/1024.0f);
+                fprintf(m_pFile, "å½“å‰å·²ç”¨ç‰©ç†å†…å­˜æ€»æ•°:[%d]Byte\t[%.2f]M\n", dwUsePhys, dwUsePhys/1024.0f/1024.0f);
 
                 OnOutputSelfInfo();
 
@@ -214,7 +214,7 @@ void CDebugInfoHelper::OnCatch()
 
         }
 
-        // ²úÉúDumpÎÄ¼ş
+        // äº§ç”ŸDumpæ–‡ä»¶
         try
         {
             do 
@@ -398,7 +398,7 @@ void CDebugInfoHelper::BugCount()
 {
     std::string strSaveCurDir	= GetCurDir();
 
-    // ¸ü¸Ä¹¤×÷Ä¿Â¼
+    // æ›´æ”¹å·¥ä½œç›®å½•
     const char* pszDir = m_strPath.c_str();
 
     char szLogDirectory[MAX_PATH] = {0};
@@ -425,7 +425,7 @@ void CDebugInfoHelper::BugCount()
     CreateDir(szLogDirectory);
     ChangeDir(szLogDirectory);
 
-    // ¼ÇÂ¼ÊıÁ¿
+    // è®°å½•æ•°é‡
     FILE* file = fopen("BugCount.txt", "w");
 
     if (file == NULL)
@@ -433,7 +433,7 @@ void CDebugInfoHelper::BugCount()
         return;
     }
 
-    fprintf(file, "×ÜÊıÁ¿:%d\n", m_vecExistStackAddr.size());
+    fprintf(file, "æ€»æ•°é‡:%d\n", m_vecExistStackAddr.size());
 
     for (unsigned int i=0; i<m_vecExistStackAddr.size(); i++)
     {

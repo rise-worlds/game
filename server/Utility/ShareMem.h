@@ -15,43 +15,43 @@ typedef	HANDLE	SMHandle;
 typedef	int	SMHandle;
 #define INVALID_SM_HANDLE	 (0)
 #endif
-	/*´´½¨ShareMem ÄÚ´æÇø
+	/*åˆ›å»ºShareMem å†…å­˜åŒº
 	*
-	*	key   ´´½¨ShareMem µÄ¹Ø¼üÖµ
+	*	key   åˆ›å»ºShareMem çš„å…³é”®å€¼
 	*
-	*   Size  ´´½¨´óĞ¡
+	*   Size  åˆ›å»ºå¤§å°
 	*
-	*	·µ»Ø ¶ÔÓ¦ShareMem±£³ÖÖµ
+	*	è¿”å› å¯¹åº”ShareMemä¿æŒå€¼
 	*/
 	COMMON_API SMHandle		CreateShareMem(SM_KEY key, unsigned int Size);
-	/*´ò¿ªShareMem ÄÚ´æÇø
+	/*æ‰“å¼€ShareMem å†…å­˜åŒº
 	*
-	* key   ´ò¿ªShareMem µÄ¹Ø¼üÖµ
+	* key   æ‰“å¼€ShareMem çš„å…³é”®å€¼
 	*
-	* Size  ´ò¿ª´óĞ¡
+	* Size  æ‰“å¼€å¤§å°
 	*
-	* ·µ»Ø  ¶ÔÓ¦ShareMem ±£³ÖÖµ
+	* è¿”å›  å¯¹åº”ShareMem ä¿æŒå€¼
 	*/
 	COMMON_API SMHandle		OpenShareMem(SM_KEY key, unsigned int Size);
 
-	/*Ó³ÉäShareMem ÄÚ´æÇø
+	/*æ˜ å°„ShareMem å†…å­˜åŒº
 	*
-	*	handle Ó³ÉäShareMem µÄ±£³ÖÖµ
+	*	handle æ˜ å°„ShareMem çš„ä¿æŒå€¼
 	*
-	*   ·µ»Ø ShareMem µÄÊı¾İÖ¸Õë
+	*   è¿”å› ShareMem çš„æ•°æ®æŒ‡é’ˆ
 	*/
 	COMMON_API char*			MapShareMem(SMHandle handle);
 
-	/*¹Ø±ÕÓ³Éä ShareMem ÄÚ´æÇø
+	/*å…³é—­æ˜ å°„ ShareMem å†…å­˜åŒº
 	*
-	*	MemoryPtr			ShareMem µÄÊı¾İÖ¸Õë
+	*	MemoryPtr			ShareMem çš„æ•°æ®æŒ‡é’ˆ
 	*
 	*
 	*/
 	COMMON_API void 		UnMapShareMem(char* MemoryPtr);
 
-	/*	¹Ø±ÕShareMem
-	* 	handle  ĞèÒª¹Ø±ÕµÄShareMem ±£³ÖÖµ
+	/*	å…³é—­ShareMem
+	* 	handle  éœ€è¦å…³é—­çš„ShareMem ä¿æŒå€¼
 	*/
 	COMMON_API void 		CloseShareMem(SMHandle handle);
 }
