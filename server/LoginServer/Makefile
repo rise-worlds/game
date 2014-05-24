@@ -1,15 +1,17 @@
-﻿ROOT_DIR:=..
+ROOT_DIR:=..
 
 include $(ROOT_DIR)/Makefile.include
+
+OUT_DIR:=./$(BUILD_FLAG)/
+INCLUDE:=-I. -I..
+TARGET_LIB:=$(OUT_DIR)LoginServer.so
+DEPEND_LIB:=$(BASEROOT_DIR)/$(BIN_DIR)/$(BUILD_FLAG)/Utility.so \
+	$(BASEROOT_DIR)/$(BIN_DIR)/$(BUILD_FLAG)/AsioNetwork.so \
+	$(BASEROOT_DIR)/$(BIN_DIR)/$(BUILD_FLAG)/OTLDataBase.so
 
 MODULES:=\
 	DBTransaction.o \
 	OTLDataBase.o
-
-OUT_DIR:=./$(BUILD_FLAG)/
-INCLUDE:=-I. -I..
-TARGET_LIB:=$(OUT_DIR)OTLDataBase.so
-DEPEND_LIB:=$(BASEROOT_DIR)/$(BIN_DIR)/$(BUILD_FLAG)/Utility.so
 
 all: $(TARGET_LIB)
 
