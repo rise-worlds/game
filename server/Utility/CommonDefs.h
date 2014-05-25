@@ -69,7 +69,7 @@ typedef double              REAL64, *PREAL64;
 #else
 typedef void				VOID;
 #endif
-typedef	int					BOOL;
+//typedef	int					BOOL;
 typedef char				CHAR;
 typedef short				SHORT;
 typedef long				LONG;

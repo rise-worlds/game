@@ -28,6 +28,18 @@
     <Filter Include="Console">
       <UniqueIdentifier>{c9ec232f-09e9-47d4-ad40-46058e5b26d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{8b94fada-ca14-49e2-b14c-1f8527cdf0ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{38dba484-277a-4d74-905e-39c07c481e99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileSystem">
+      <UniqueIdentifier>{bcf010c7-2560-491f-87b9-21f38069c5c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MarkupSTL">
+      <UniqueIdentifier>{704c7748-3449-443c-b273-daf1719e1a3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -37,15 +49,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Single.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="CThread.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="CTimer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FileSystemUtil.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FunctionGuard.h">
@@ -75,26 +78,26 @@
     <ClInclude Include="ConsoleParamParse.h">
       <Filter>Console</Filter>
     </ClInclude>
+    <ClInclude Include="CThread.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimer.h">
+      <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystemUtil.h">
+      <Filter>FileSystem</Filter>
+    </ClInclude>
     <ClInclude Include="Ini.h">
-      <Filter>头文件</Filter>
+      <Filter>FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
-      <Filter>头文件</Filter>
+      <Filter>FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="MarkupSTL.h">
-      <Filter>头文件</Filter>
+      <Filter>MarkupSTL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CThread.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="CTimer.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="FileSystemUtil.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="FunctionGuard.cpp">
       <Filter>FunctionGuard</Filter>
     </ClCompile>
@@ -110,14 +113,23 @@
     <ClCompile Include="Console.cpp">
       <Filter>Console</Filter>
     </ClCompile>
+    <ClCompile Include="CThread.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystemUtil.cpp">
+      <Filter>FileSystem</Filter>
+    </ClCompile>
     <ClCompile Include="Ini.cpp">
-      <Filter>源文件</Filter>
+      <Filter>FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="Log.cpp">
-      <Filter>源文件</Filter>
+      <Filter>FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="MarkupSTL.cpp">
-      <Filter>源文件</Filter>
+      <Filter>MarkupSTL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

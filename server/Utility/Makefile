@@ -18,14 +18,7 @@ INCLUDE:=-I. -I..
 TARGET_LIB:=Utility.so
 DEPEND_LIB:=
 
-all: 
-	ifeq "$(wildcard $(OUT_DIR))" ""
-		mkdir $(OUT_DIR)
-		echo "directory not existed"
-	else
-		echo "directory existed"
-	endif
-	$(TARGET_LIB)
+all: $(TARGET_LIB)
 
 $(TARGET_LIB) : $(DEPENDENCIES)
 	@$(ECHO) $(STR_SHARED)

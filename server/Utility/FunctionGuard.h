@@ -15,10 +15,10 @@ BEGINNAMESPACE
 #ifdef FUNCTION_GUARD
 
 #define ENTER_FUNCTION_FOXNET try {
-#define LEAVE_FUNCTION_FOXNET } catch(...) { SGCommon::CDebugInfoHelper::getSingleton().OnCatch(); }
-#define LEAVE_FUNCTION_RETURN_0 } catch(...) { SGCommon::CDebugInfoHelper::getSingleton().OnCatch(); return 0;}
-#define LEAVE_FUNCTION_RETURN_FALSE } catch(...) { SGCommon::CDebugInfoHelper::getSingleton().OnCatch(); return false;}
-#define LEAVE_FUNCTION_RETURN_NULL } catch(...) { SGCommon::CDebugInfoHelper::getSingleton().OnCatch(); return NULL;}
+#define LEAVE_FUNCTION_FOXNET } catch(...) { Common::CDebugInfoHelper::getSingleton().OnCatch(); }
+#define LEAVE_FUNCTION_RETURN_0 } catch(...) { Common::CDebugInfoHelper::getSingleton().OnCatch(); return 0;}
+#define LEAVE_FUNCTION_RETURN_FALSE } catch(...) { Common::CDebugInfoHelper::getSingleton().OnCatch(); return false;}
+#define LEAVE_FUNCTION_RETURN_NULL } catch(...) { Common::CDebugInfoHelper::getSingleton().OnCatch(); return NULL;}
 #else
 
 #define ENTER_FUNCTION_FOXNET {

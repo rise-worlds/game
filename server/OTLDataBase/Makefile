@@ -1,4 +1,4 @@
-﻿ROOT_DIR:=..
+ROOT_DIR:=..
 
 include $(ROOT_DIR)/Makefile.include
 
@@ -7,17 +7,17 @@ MODULES:=\
 	OTLDataBase.o
 
 OUT_DIR:=./$(BUILD_FLAG)/
-INCLUDE:=-I. -I..
-TARGET_LIB:=$(OUT_DIR)OTLDataBase.so
-DEPEND_LIB:=$(BASEROOT_DIR)/$(BIN_DIR)/$(BUILD_FLAG)/Utility.so
+INCLUDE:=-I. -I.. -I../Utility
+TARGET_LIB:=OTLDataBase.so
+DEPEND_LIB:=
 
 all: $(TARGET_LIB)
 
 $(TARGET_LIB) : $(DEPENDENCIES)
 	@$(ECHO) $(STR_SHARED)
-	@$(CC) $(CSHARED) $(CFLAG)$(TARGET_LIB) $(OUT_DIR)*.o -L$(ROOT_DIR)/$(BIN_DIR) $(LIB_ODBC) $(DEPEND_LIB)
+	@$(CC) $(CSHARED) $(CFLAG) $(OUT_DIR)$(TARGET_LIB) $(OUT_DIR)*.o -L$(ROOT_DIR)/$(BIN_DIR) $(DEPEND_LIB)
 	@$(ECHO) $(STR_COPY)
-	@$(CP) $(TARGET_LIB) $(ROOT_DIR)/$(BIN_DIR)/$(BUILD_FLAG)
+	@$(CP) $(OUT_DIR)$(TARGET_LIB) $(ROOT_DIR)/$(BIN_DIR)/$(BUILD_FLAG)
 
 %.o: %.cpp
 	@echo $(STR_COMPILE): $(OUT_DIR)$@ 
