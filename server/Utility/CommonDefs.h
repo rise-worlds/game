@@ -69,11 +69,23 @@ typedef double              REAL64, *PREAL64;
 #else
 typedef void				VOID;
 #endif
-//typedef	int					BOOL;
-typedef char				CHAR;
-typedef short				SHORT;
-typedef long				LONG;
-typedef int					INT;
+#ifdef _WIN32
+typedef void *				PVOID;
+typedef void * __ptr64		PVOID64;
+typedef	int					BOOL, *PBOOL;
+typedef unsigned long       DWORD, *PDWORD;
+#endif
+typedef char				CHAR, *PCHAR;
+typedef short				SHORT, *PSHORT;
+typedef long				LONG, *PLONG;
+typedef int					INT, *PINT;
+typedef unsigned char       BYTE, *PBYTE;
+typedef unsigned short      WORD, *PWORD;
+typedef float               FLOAT, *PFLOAT;
+typedef double				DOUBLE, *PDOUBLE;
+typedef unsigned long		ULONG, *PULONG;
+typedef unsigned short		USHORT, *PUSHORT;
+typedef unsigned char		UCHAR, *PUCHAR;
 
 #ifdef _WIN32	// min & max
 
