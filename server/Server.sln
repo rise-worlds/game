@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsioNetwork", "AsioNetwork\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OTLDataBase", "OTLDataBase\OTLDataBase.vcxproj", "{CB01D70D-6452-48E5-BD9A-0755F6D9970E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerMonitor", "ServerMonitor\ServerMonitor.vcxproj", "{A4E2DA0E-374C-4EF4-86AD-7AF8DBAD190F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -33,6 +35,10 @@ Global
 		{CB01D70D-6452-48E5-BD9A-0755F6D9970E}.Debug|Win32.Build.0 = Debug|Win32
 		{CB01D70D-6452-48E5-BD9A-0755F6D9970E}.Release|Win32.ActiveCfg = Release|Win32
 		{CB01D70D-6452-48E5-BD9A-0755F6D9970E}.Release|Win32.Build.0 = Release|Win32
+		{A4E2DA0E-374C-4EF4-86AD-7AF8DBAD190F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A4E2DA0E-374C-4EF4-86AD-7AF8DBAD190F}.Debug|Win32.Build.0 = Debug|Win32
+		{A4E2DA0E-374C-4EF4-86AD-7AF8DBAD190F}.Release|Win32.ActiveCfg = Release|Win32
+		{A4E2DA0E-374C-4EF4-86AD-7AF8DBAD190F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

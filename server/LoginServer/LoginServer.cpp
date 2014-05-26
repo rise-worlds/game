@@ -2,6 +2,25 @@
 //
 
 #include "stdafx.h"
+#include "../Utility/CommonDefs.h"
+#include "Master.h"
+
+class CMyService
+{
+public:
+	CMyService()
+	{
+
+	}
+
+	void Run(DWORD argc, LPTSTR* argv)
+	{
+
+	}
+
+private:
+	CMaster* pMaster;
+};
 
 
 int _tmain(int argc, _TCHAR* argv[])
