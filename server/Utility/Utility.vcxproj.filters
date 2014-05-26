@@ -40,9 +40,6 @@
     <Filter Include="XMLParse">
       <UniqueIdentifier>{704c7748-3449-443c-b273-daf1719e1a3b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NTService">
-      <UniqueIdentifier>{0d46dcd1-5a6f-4493-96e8-38bb5a247a56}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -102,15 +99,6 @@
     <ClInclude Include="LTModule.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="NTService.h">
-      <Filter>NTService</Filter>
-    </ClInclude>
-    <ClInclude Include="NTServiceEventLogMsg.h">
-      <Filter>NTService</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>NTService</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FunctionGuard.cpp">
@@ -148,12 +136,6 @@
     </ClCompile>
     <ClCompile Include="LTModule.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>NTService</Filter>
-    </ClCompile>
-    <ClCompile Include="NTService.cpp">
-      <Filter>NTService</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

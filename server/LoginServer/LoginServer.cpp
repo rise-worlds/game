@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "../Utility/CommonDefs.h"
 #include "Master.h"
 
 class CMyService
