@@ -89,10 +89,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientLink.h" />
+    <ClInclude Include="ClientLinkMgr.h" />
     <ClInclude Include="Master.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClientLink.cpp" />
+    <ClCompile Include="ClientLinkMgr.cpp" />
     <ClCompile Include="LoginServer.cpp" />
     <ClCompile Include="Master.cpp" />
     <ClCompile Include="stdafx.cpp">

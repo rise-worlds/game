@@ -1,9 +1,12 @@
 #ifndef __MASTER_H__
 #define __MASTER_H__
 
+#include <string>
 #include "../Utility/CommonDefs.h"
 #include "../Utility/Single.h"
 #include "../Utility/CTimer.h"
+#include "../../common/bytebuffer.h"
+
 class AsioNetwork;
 
 class CMaster : public Common::Single<CMaster>
@@ -51,5 +54,7 @@ private:
 
 	Common::SGtimer	m_CheckConnectTimer;
 };
+
+#define Df_Master CMaster::getSingle();
 
 #endif

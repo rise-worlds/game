@@ -114,6 +114,10 @@ inline T min(T a, T b) {return (a > b) ? a : b;}
 										{ return m_##name; } \
 											void Set##name(type value) \
 										{ m_##name = value;}
+#define FOREACH_IT(type, name, it) for (type::iterator it = (name).begin(); it != (name).end(); it++)
+#define FOREACH_COUNT(name, begin, end) for (int name = int(begin); (name) < int(end); (name)++)
+#define MAP_FIND(type, name, it, value)	type::iterator it = name.find(value); \
+	if (it != name.end())
 
 #define MAX_PATH 260
 

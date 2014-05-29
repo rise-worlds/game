@@ -42,15 +42,15 @@ private:
 ////////////////////////////////////////////////
 public:
 	Ini();
-	Ini(const CHAR* filename);								//初始化打开配置文件
-	virtual ~Ini();									//释放内存
+	Ini(const CHAR* filename);							//初始化打开配置文件
+	virtual ~Ini();										//释放内存
 	CHAR			*GetData();							//返回文件内容
 	INT				GetLines(INT);						//返回文件的行数
-	INT				GetLines();						//返回文件的行数
+	INT				GetLines();							//返回文件的行数
 
-	BOOL			Open(const CHAR* filename);				//打开配置文件
+	BOOL			Open(const CHAR* filename);			//打开配置文件
 	VOID			Close();							//关闭配置文件
-	BOOL			Save(CHAR *filename = NULL);			//保存配置文件
+	BOOL			Save(CHAR *filename = NULL);		//保存配置文件
 	INT				FindIndex(CHAR *);					//返回标题位置
 
 ////////////////////////////////////////////////

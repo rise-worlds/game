@@ -30,10 +30,10 @@ public:
 
 ENDNAMESPACE
 
-#define DISPMSG(...)	Common::Log::getSingleton().OutLog(Common::eLog_Normal, __FUNCTION__, __VA_ARGS__);
-#define WARNINGMSG(...)	Common::Log::getSingleton().OutLog(Common::eLog_Warning, __FUNCTION__, __VA_ARGS__);
-#define SUCCESSMSG(...)	Common::Log::getSingleton().OutLog(Common::eLog_Success, __FUNCTION__, __VA_ARGS__);
-#define ERRMSG(...)	Common::Log::getSingleton().OutLog(Common::eLog_Error, __FUNCTION__, __VA_ARGS__);
+#define DISPMSG(...)	Common::Log::getSingle().OutLog(Common::eLog_Normal, __FUNCTION__, __VA_ARGS__);
+#define WARNINGMSG(...)	Common::Log::getSingle().OutLog(Common::eLog_Warning, __FUNCTION__, __VA_ARGS__);
+#define SUCCESSMSG(...)	Common::Log::getSingle().OutLog(Common::eLog_Success, __FUNCTION__, __VA_ARGS__);
+#define ERRMSG(...)	Common::Log::getSingle().OutLog(Common::eLog_Error, __FUNCTION__, __VA_ARGS__);
 
 //==============================l==w=================================
 //#undef	SAFE_DELETE

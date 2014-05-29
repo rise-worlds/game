@@ -1,12 +1,11 @@
 #pragma once
 
 #include <assert.h>
-#include "GlobalDefine.h"
 
 class WriteBuf
 {
 public:
-	WriteBuf(SGuint32 nCount): m_WritePos(0), m_bData(NULL), m_nCount(0) 
+	WriteBuf(UINT32 nCount): m_WritePos(0), m_bData(NULL), m_nCount(0) 
 	{
 		Reset(nCount);
 	}
@@ -15,7 +14,7 @@ public:
 	{
 	}
 
-	WriteBuf(SGuint8* ptr, SGuint32 nCount)
+	WriteBuf(UINT8* ptr, UINT32 nCount)
 	{ 
 		Reset(ptr, nCount); 
 	}
@@ -26,7 +25,7 @@ public:
 			delete[] m_bData;	
 	}
 
-	void Reset(SGuint32 nCount)
+	void Reset(UINT32 nCount)
 	{
 		m_bIsNew	= true;
 
@@ -38,10 +37,10 @@ public:
 
 		m_WritePos	= 0;
 		m_nCount	= nCount;
-		m_bData	= new SGuint8[nCount];
+		m_bData = new UINT8[nCount];
 	}
 
-	void Reset(SGuint8* ptr, SGuint32 nCount)
+	void Reset(UINT8* ptr, UINT32 nCount)
 	{
 		m_bIsNew	= false;
 
@@ -74,108 +73,108 @@ public:
 													return *this; \
 												}
 	DEFINE_FAST_WRITE_OPERATOR(bool, 1);	
-	DEFINE_FAST_WRITE_OPERATOR(SGuint8, 1);	
-	DEFINE_FAST_WRITE_OPERATOR(SGuint16, 2);	
-	DEFINE_FAST_WRITE_OPERATOR(SGuint32, 4);	
-	DEFINE_FAST_WRITE_OPERATOR(SGuint64, 8);	
-	DEFINE_FAST_WRITE_OPERATOR(SGint8, 1);	
-	DEFINE_FAST_WRITE_OPERATOR(SGint16, 2);	
-	DEFINE_FAST_WRITE_OPERATOR(SGint32, 4);	
-	DEFINE_FAST_WRITE_OPERATOR(SGint64, 8);	
-	DEFINE_FAST_WRITE_OPERATOR(SGreal32, 4);	
-	DEFINE_FAST_WRITE_OPERATOR(SGreal64, 8);	
+	DEFINE_FAST_WRITE_OPERATOR(UINT8, 1);
+	DEFINE_FAST_WRITE_OPERATOR(UINT16, 2);
+	DEFINE_FAST_WRITE_OPERATOR(UINT32, 4);
+	DEFINE_FAST_WRITE_OPERATOR(UINT64, 8);
+	DEFINE_FAST_WRITE_OPERATOR(INT8, 1);	
+	DEFINE_FAST_WRITE_OPERATOR(INT16, 2);	
+	DEFINE_FAST_WRITE_OPERATOR(INT32, 4);	
+	DEFINE_FAST_WRITE_OPERATOR(INT64, 8);	
+	DEFINE_FAST_WRITE_OPERATOR(REAL32, 4);	
+	DEFINE_FAST_WRITE_OPERATOR(REAL64, 8);	
 
 #undef DEFINE_FAST_WRITE_OPERATOR
 
 	WriteBuf &operator<<(const std::string &value) 
 	{
-		append((SGuint8 *)value.c_str(), value.length());
-		append((SGuint8)0);
+		append((UINT8 *)value.c_str(), value.length());
+		append((UINT8)0);
 		return *this;
 	}
 
 	WriteBuf &operator<<(char *str) 
 	{
-		append((SGuint8 *)str, strlen(str));
-		append((SGuint8)0);
+		append((UINT8 *)str, strlen(str));
+		append((UINT8)0);
 		return *this;
 	}
 
 	WriteBuf &operator<<(const char *str) 
 	{
-		append((SGuint8 *)str, strlen(str));
-		append((SGuint8)0);
+		append((UINT8 *)str, strlen(str));
+		append((UINT8)0);
 		return *this;
 	}
 
-	void append(const SGuint8 *src, size_t cnt) 
+	void append(const UINT8 *src, size_t cnt)
 	{
 		if (!cnt) return;
 
 		assert(m_WritePos + cnt <= m_nCount);
 
 		memcpy(&m_bData[m_WritePos], src, cnt);
-		m_WritePos += SGuint32(cnt);
+		m_WritePos += UINT32(cnt);
 	}
 
-    SGuint8* GetPtr()
+	UINT8* GetPtr()
 	{
 		return m_bData;
 	}
 
-	SGuint8*	GetCurPtr()
+	UINT8*	GetCurPtr()
 	{
-		return (SGuint8*)(m_bData + m_WritePos);
+		return (UINT8*)(m_bData + m_WritePos);
 	}
 
-	SGuint16	GetReadSize()
+	UINT16	GetReadSize()
 	{
-		return static_cast<SGuint16>(m_WritePos);
+		return static_cast<UINT16>(m_WritePos);
 	}
 
-	SGuint16	GetBufferSize()
+	UINT16	GetBufferSize()
 	{
 		return m_nCount;
 	}
 
 private:
-	SGuint8	m_bIsNew;
-	SGuint32	m_nCount;
-	SGuint32	m_WritePos;
-	SGuint8*	m_bData;
+	UINT8	m_bIsNew;
+	UINT32	m_nCount;
+	UINT32	m_WritePos;
+	PUINT8	m_bData;
 };
 
 class ReadBuf
 {
 public:
-	ReadBuf(const SGuint8* pData, SGuint16 nMaxSize)
+	ReadBuf(const UINT8* pData, UINT16 nMaxSize)
 	{
 		Reset(pData, nMaxSize);
 	}
 
-	void Reset(const SGuint8* pData, SGuint16 nMaxSize)
+	void Reset(const UINT8* pData, UINT16 nMaxSize)
 	{
 		m_MaxSize	= nMaxSize;
 		m_pData	= pData;
 		m_ReadPos	= 0;
 	}
 
-	SGuint8*	GetPtr()
+	PUINT8	GetPtr()
 	{
-		return const_cast<SGuint8*>(m_pData);
+		return const_cast<PUINT8>(m_pData);
 	}
 
-	SGuint16	GetReadSize()
+	UINT16	GetReadSize()
 	{
 		return m_MaxSize;
 	}	
 
-	SGuint8*	GetCurPtr()
+	PUINT8	GetCurPtr()
 	{
-		return (SGuint8*)(m_pData + m_ReadPos);
+		return (UINT8*)(m_pData + m_ReadPos);
 	}
 
-	void SetCurPtr(SGuint16 nLen)
+	void SetCurPtr(UINT16 nLen)
 	{
 		assert(m_ReadPos + nLen <= m_MaxSize);
 		m_ReadPos += nLen;
@@ -209,7 +208,7 @@ public:
 		}
 	}
 
-	void read(SGuint8 *dest, size_t len) 
+	void read(UINT8 *dest, size_t len)
 	{
 		if (m_ReadPos + len <= m_MaxSize) 
 		{
@@ -221,7 +220,7 @@ public:
 			memset(dest, 0, len);
 		}
 
-		m_ReadPos += SGuint16(len);
+		m_ReadPos += UINT16(len);
 	}
 
 public:
@@ -238,16 +237,16 @@ public:
 												}
 
 	DEFINE_FAST_READ_OPERATOR(bool, 1);	
-	DEFINE_FAST_READ_OPERATOR(SGuint8, 1);	
-	DEFINE_FAST_READ_OPERATOR(SGuint16, 2);	
-	DEFINE_FAST_READ_OPERATOR(SGuint32, 4);	
-	DEFINE_FAST_READ_OPERATOR(SGuint64, 8);	
-	DEFINE_FAST_READ_OPERATOR(SGint8, 1);	
-	DEFINE_FAST_READ_OPERATOR(SGint16, 2);	
-	DEFINE_FAST_READ_OPERATOR(SGint32, 4);	
-	DEFINE_FAST_READ_OPERATOR(SGint64, 8);	
-	DEFINE_FAST_READ_OPERATOR(SGreal32, 4);	
-	DEFINE_FAST_READ_OPERATOR(SGreal64, 8);
+	DEFINE_FAST_READ_OPERATOR(UINT8, 1);	
+	DEFINE_FAST_READ_OPERATOR(UINT16, 2);	
+	DEFINE_FAST_READ_OPERATOR(UINT32, 4);	
+	DEFINE_FAST_READ_OPERATOR(UINT64, 8);	
+	DEFINE_FAST_READ_OPERATOR(INT8, 1);	
+	DEFINE_FAST_READ_OPERATOR(INT16, 2);	
+	DEFINE_FAST_READ_OPERATOR(INT32, 4);	
+	DEFINE_FAST_READ_OPERATOR(INT64, 8);	
+	DEFINE_FAST_READ_OPERATOR(REAL32, 4);	
+	DEFINE_FAST_READ_OPERATOR(REAL64, 8);
 
 	ReadBuf &operator>>(std::string& value) 
 	{
@@ -272,16 +271,16 @@ public:
 				break;
 			pStr[wPos++] = c;
 		}
-        
+		
 		pStr[wPos++]	= '\0';
 		return *this;
 	}
 
 
 private:
-	const SGuint8* m_pData;
-	SGuint16	m_ReadPos;
-	SGuint16	m_MaxSize;
+	const UINT8* m_pData;
+	UINT16	m_ReadPos;
+	UINT16	m_MaxSize;
 };
 
 #define GetDataByPack(pack, type, name, init)	type name(init); pack >> name;
