@@ -1,5 +1,10 @@
 ﻿#include "ClientLink.h"
 #include "../Utility/FunctionGuard.h"
+#include "../ServerMsgDef/SvrLinkMgr.h"
+#include "../../common/Packet.h"
+#include "../../common/NetworkMsgRegister.h"
+#include "../../common/Version.h"
+#include "../../common/NetMsgID.h"
 #include "ClientLinkMgr.h"
 #include "Master.h"
 
@@ -76,10 +81,10 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 			break;
 		}
 
-		// ąČ˝Ď°ćąžşĹ
+		// 比较版本号
 		if (pMsg->nCurVer < CLIENT_VERSION_ADMISSION)
 		{
-			// °ćąžşĹžÉ
+			// 版本号旧
 			Msg_LoginResult_LC	result;
 			result.nErrCode = RC_LoginResult_OldVersion;
 			SendMsg(&result);
@@ -90,7 +95,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		CSvrSession *pDBSesstion = CSvrLinkMgr::GetSingle().GetSvrLinkByType(eSvrType_DBAgent);
 		if (!pDBSesstion)
 		{
-			// °ćąžşĹžÉ
+			// 版本号旧
 			Msg_LoginResult_LC	result;
 			result.nErrCode = RC_LoginResult_OtherError;
 			SendMsg(&result);
@@ -98,7 +103,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 			break;
 		}
 
-		// ˇ˘ĎűĎ˘¸řDBServer
+		// 发消息给DBServer
 		SvrMsg_CheckLogin_DBSvr checkpack;
 		checkpack.nLoginUserID = MakeTempUserID(eSvrType_Login, Df_Master.GetSvrID(), GetTempClientID());
 		checkpack.strUserName = pMsg->strName;
@@ -119,7 +124,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		{
 			SetClientState(eLinkState_WaitLogin);
 
-			// ľÇÂźĘ§°Ü
+			// 登录失败
 			Msg_LoginResult_LC	loginresult;
 			loginresult.nErrCode = GetDBLoginCode();
 			SendMsg(&loginresult);
@@ -128,20 +133,20 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		{
 			SetClientState(eLinkState_WaitLogin);
 
-			// ľÇÂźĘ§°Ü
+			// 登录失败
 			Msg_LoginResult_LC	loginresult;
 			loginresult.nErrCode = RC_LoginResult_ErrName;
 			SendMsg(&loginresult);
 		}
 		else
 		{
-			UINT8 nWorldID = MakeSvrID(GetAccountID(), Df_Master.GetWorldAmount());
-			CSvrSession* pWorldSession = CSvrLinkMgr::GetSingle().GetSvrLinkByTypeID(eSvrType_World, nWorldID);
+			SGuint8 nWorldID = MakeSvrID(GetAccountID(), Df_Master.GetWorldAmount());
+			CSvrSession* pWorldSession = CSvrLinkMgr::GetSingleton().GetSvrLinkByTypeID(eSvrType_World, nWorldID);
 			if (!pWorldSession)
 			{
 				SetClientState(eLinkState_WaitLogin);
 
-				// ľÇÂźĘ§°Ü
+				// 登录失败
 				Msg_LoginResult_LC	loginresult;
 				loginresult.nErrCode = RC_LoginResult_OtherError;
 				SendMsg(&loginresult);
@@ -153,13 +158,13 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 				//  				{
 				// 					if(Df_Master.m_loginObserve.GetTeamSize() > 0)
 				// 					{
-				// 						//ÓĐČËÔÚśÓŔď
+				// 						//有人在队里
 				// 						if(Df_Master.m_loginObserve.GetFront() == m_AccountID)
 				// 						{
-				//ĘÇ˛ťĘÇÔÚśÓŔďľÄľÚŇť¸ö
+				//是不是在队里的第一个
 				//if(Df_ClientLinkMgr.BindAccountID(this))
 				{
-					// ľÇÂźłÉšŚ ĎňWorld ˇ˘ĚíźÓÓĂť§ĎűĎ˘
+					// 登录成功 向World 发添加用户消息
 					SvrMsg_AddUser_World	sAddUser;
 					sAddUser.nAccountID = GetAccountID();
 					sAddUser.strAccountName = GetAccountName();
@@ -184,7 +189,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 				// 
 				// 							if(!Df_Master.m_loginObserve.InsertTeam(m_AccountID))
 				// 							{
-				// 								//˛ĺČëł¤ÁŹ˝ÓśÓÎéĘ§°ÜÔň˛ĺČëśĚÁŹ˝Ó
+				// 								//插入长连接队伍失败则插入短连接
 				// 								LPSHORTLINKLOGIN pLoginUser = new SHORTLINKLOGIN;
 				// 								pLoginUser->AccountID = m_AccountID;
 				// 								pLoginUser->nCountTime = 120;
@@ -195,7 +200,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 				// 								queuLogic.nLoginType = 2;
 				// 								if(nPlace || !Df_Master.m_loginObserve.InsertShortLinkTeam(pLoginUser))
 				// 								{
-				// 									//ČçšűśĚÁŹ˝ÓŇ˛Ę§°ÜŁŹÔňĘÍˇĹ
+				// 									//如果短连接也失败，则释放
 				// 									SGDelete (pLoginUser);
 				// 									queuLogic.nLoginType = 3;
 				// 								}
@@ -220,7 +225,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 				// 					else
 				// 					{
 				// 						Df_ClientLinkMgr.BindAccountID(this);
-				// 						// ľÇÂźłÉšŚ ĎňWorld ˇ˘ĚíźÓÓĂť§ĎűĎ˘
+				// 						// 登录成功 向World 发添加用户消息
 				// 						SvrMsg_AddUser_World	sAddUser;
 				// 						sAddUser.nAccountID	= GetAccountID();
 				// 						sAddUser.strAccountName = GetAccountName();
@@ -233,7 +238,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 				// 				{
 				// 					if(!Df_Master.m_loginObserve.InsertTeam(m_AccountID))
 				// 					{
-				// 						//˛ĺČëł¤ÁŹ˝ÓśÓÎéĘ§°ÜÔň˛ĺČëśĚÁŹ˝Ó
+				// 						//插入长连接队伍失败则插入短连接
 				// 						LPSHORTLINKLOGIN pLoginUser = new SHORTLINKLOGIN;
 				// 						pLoginUser->AccountID = m_AccountID;
 				// 						pLoginUser->nCountTime = 120;
@@ -244,7 +249,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 				// 						queuLogic.nTime = 120;
 				// 						if(nPlace || !Df_Master.m_loginObserve.InsertShortLinkTeam(pLoginUser))
 				// 						{
-				// 							//ČçšűśĚÁŹ˝ÓŇ˛Ę§°ÜŁŹÔňĘÍˇĹ
+				// 							//如果短连接也失败，则释放
 				// 							SGDelete (pLoginUser);
 				// 							queuLogic.nLoginType = 3;
 				// 						}
@@ -280,7 +285,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 
 		SetClientState(eLinkState_CharOperating);
 
-		// ˇ˘ËÍľ˝World˝řĐĐ˝ÇÉŤ˛éŃŻ
+		// 发送到World进行角色查询
 		SvrMsg_QueryCharInfo_World sQueryCharInfo;
 		sQueryCharInfo.nAccountID = GetAccountID();
 		pWorldSession->SendMsg(&sQueryCharInfo);
@@ -296,7 +301,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 			break;
 		}
 
-		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingle().GetSvrLinkByTypeID(eSvrType_World, GetWorldSvrID());
+		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingleton().GetSvrLinkByTypeID(eSvrType_World, GetWorldSvrID());
 		if (!pWorldSession)
 		{
 			Msg_CreateCharResult_LC sMsg;
@@ -307,7 +312,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 
 		SetClientState(eLinkState_CharOperating);
 
-		// ˇ˘ËÍľ˝World˝řĐĐĚíźÓ˝ÇÉŤ
+		// 发送到World进行添加角色
 		SvrMsg_CreateChar_World sCreateChar;
 		sCreateChar.nAccountID = GetAccountID();
 		memcpy(&sCreateChar.CharInfo, &pMsg->CharInfo, sizeof(sCreateChar.CharInfo));
@@ -322,7 +327,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 			break;
 		}
 
-		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingle().GetSvrLinkByTypeID(eSvrType_World, GetWorldSvrID());
+		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingleton().GetSvrLinkByTypeID(eSvrType_World, GetWorldSvrID());
 		if (!pWorldSession)
 		{
 			Msg_DeleteCharResult_LC sMsg;
@@ -333,7 +338,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 
 		SetClientState(eLinkState_CharOperating);
 
-		// ˇ˘ËÍľ˝World˝řĐĐÉžłý˝ÇÉŤ
+		// 发送到World进行删除角色
 		SvrMsg_DeleteChar_World sDeleteChar;
 		sDeleteChar.nAccountID = GetAccountID();
 		pWorldSession->SendMsg(&sDeleteChar);
@@ -346,7 +351,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 			break;
 		}
 
-		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingle().GetSvrLinkByTypeID(eSvrType_World, GetWorldSvrID());
+		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingleton().GetSvrLinkByTypeID(eSvrType_World, GetWorldSvrID());
 		if (!pWorldSession)
 		{
 			Msg_EnterGameResult_LC sMsg;
@@ -374,7 +379,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 			break;
 		}
 
-		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingle().GetSvrLinkByTypeID(eSvrType_World, GetWorldSvrID());
+		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingleton().GetSvrLinkByTypeID(eSvrType_World, GetWorldSvrID());
 		if (!pWorldSession)
 		{
 			Msg_BackToLoginResult_LC sMsg;
@@ -399,13 +404,13 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		break;
 	case eMsg_QueueLogin_LC:
 	{
-		UINT8 nWorldID = MakeSvrID(GetAccountID(), Df_Master.GetWorldAmount());
-		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingle().GetSvrLinkByTypeID(eSvrType_World, nWorldID);
+		SGuint8 nWorldID = MakeSvrID(GetAccountID(), Df_Master.GetWorldAmount());
+		CSvrSession* pWorldSession = CSvrLinkMgr::GetSingleton().GetSvrLinkByTypeID(eSvrType_World, nWorldID);
 		if (!pWorldSession)
 		{
 			SetClientState(eLinkState_WaitLogin);
 
-			// ľÇÂźĘ§°Ü
+			// 登录失败
 			Msg_LoginResult_LC	loginresult;
 			loginresult.nErrCode = RC_LoginResult_OtherError;
 			SendMsg(&loginresult);
@@ -424,12 +429,12 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		// 				{
 		// 					if(Df_Master.m_loginObserve.GetTeamSize() > 0)
 		// 					{
-		// 						//ÓĐČËÔÚśÓŔď
+		// 						//有人在队里
 		// 						if(Df_Master.m_loginObserve.GetFront() == m_AccountID)
 		// 						{
-		// 							//ĘÇ˛ťĘÇÔÚśÓŔďľÄľÚŇť¸ö
+		// 							//是不是在队里的第一个
 		// 							Df_ClientLinkMgr.BindAccountID(this);
-		// ľÇÂźłÉšŚ ĎňWorld ˇ˘ĚíźÓÓĂť§ĎűĎ˘
+		// 登录成功 向World 发添加用户消息
 		SvrMsg_AddUser_World	sAddUser;
 		sAddUser.nAccountID = GetAccountID();
 		sAddUser.strAccountName = GetAccountName();
@@ -452,7 +457,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		// 
 		// 							if(!Df_Master.m_loginObserve.InsertTeam(m_AccountID))
 		// 							{
-		// 								//˛ĺČëł¤ÁŹ˝ÓśÓÎéĘ§°ÜÔň˛ĺČëśĚÁŹ˝Ó
+		// 								//插入长连接队伍失败则插入短连接
 		// 								LPSHORTLINKLOGIN pLoginUser = new SHORTLINKLOGIN;
 		// 								pLoginUser->AccountID = m_AccountID;
 		// 								pLoginUser->nCountTime = 120;
@@ -463,7 +468,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		// 								queuLogic.nLoginType = 2;
 		// 								if(nPlace || !Df_Master.m_loginObserve.InsertShortLinkTeam(pLoginUser))
 		// 								{
-		// 									//ČçšűśĚÁŹ˝ÓŇ˛Ę§°ÜŁŹÔňĘÍˇĹ
+		// 									//如果短连接也失败，则释放
 		// 									SGDelete (pLoginUser);
 		// 									queuLogic.nLoginType = 3;
 		// 								}
@@ -488,7 +493,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		// 					else
 		// 					{
 		// 						Df_ClientLinkMgr.BindAccountID(this);
-		// 						// ľÇÂźłÉšŚ ĎňWorld ˇ˘ĚíźÓÓĂť§ĎűĎ˘
+		// 						// 登录成功 向World 发添加用户消息
 		// 						SvrMsg_AddUser_World	sAddUser;
 		// 						sAddUser.nAccountID	= GetAccountID();
 		// 						sAddUser.strAccountName = GetAccountName();
@@ -501,7 +506,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		// 				{
 		// 					if(!Df_Master.m_loginObserve.InsertTeam(m_AccountID))
 		// 					{
-		// 						//˛ĺČëł¤ÁŹ˝ÓśÓÎéĘ§°ÜÔň˛ĺČëśĚÁŹ˝Ó
+		// 						//插入长连接队伍失败则插入短连接
 		// 						LPSHORTLINKLOGIN pLoginUser = new SHORTLINKLOGIN;
 		// 						pLoginUser->AccountID = m_AccountID;
 		// 						pLoginUser->nCountTime = 120;
@@ -512,7 +517,7 @@ void	ClientLink::OnRecv(void *pMsg, short nSize)
 		// 						queuLogic.nTime = 120;
 		// 						if(nPlace || !Df_Master.m_loginObserve.InsertShortLinkTeam(pLoginUser))
 		// 						{
-		// 							//ČçšűśĚÁŹ˝ÓŇ˛Ę§°ÜŁŹÔňĘÍˇĹ
+		// 							//如果短连接也失败，则释放
 		// 							SGDelete (pLoginUser);
 		// 							queuLogic.nLoginType = 3;
 		// 						}

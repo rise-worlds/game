@@ -55,6 +55,6 @@ private:
 	Common::SGtimer	m_CheckConnectTimer;
 };
 
-#define Df_Master CMaster::getSingle();
+#define Df_Master CMaster::getSingle()
 
 #endif

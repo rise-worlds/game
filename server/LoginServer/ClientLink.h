@@ -14,11 +14,12 @@ enum eClientLinkState
 #define KICK_WAIT_TIMER	(1000*60*3)
 
 #include "../Utility/CommonDefs.h"
+#include "../AsioNetwork/NetObject.h"
 #include <string>
 
 class PackCommon;
 
-class ClientLink
+class ClientLink : public NetObject
 {
 public:
 	ClientLink();
