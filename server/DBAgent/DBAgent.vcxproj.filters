@@ -20,6 +20,21 @@
     <ClInclude Include="stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CMaster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DBUser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DBUserMgr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginSession.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Transaction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DBAgent.cpp">
@@ -28,5 +43,23 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CMaster.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DBUser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DBUserMgr.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginSession.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Transaction.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
   </ItemGroup>
 </Project>

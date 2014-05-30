@@ -58,6 +58,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../;../../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -91,12 +92,14 @@
   <ItemGroup>
     <ClInclude Include="ClientLink.h" />
     <ClInclude Include="ClientLinkMgr.h" />
+    <ClInclude Include="DBAgentSession.h" />
     <ClInclude Include="Master.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientLink.cpp" />
     <ClCompile Include="ClientLinkMgr.cpp" />
+    <ClCompile Include="DBAgentSession.cpp" />
     <ClCompile Include="LoginServer.cpp" />
     <ClCompile Include="Master.cpp" />
     <ClCompile Include="stdafx.cpp">
