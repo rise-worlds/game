@@ -25,9 +25,12 @@
 #include "ServerMsgDef/SvrMsg_WorldServer.h"
 #include <vector>
 
-#include "Master.h"
+#include "DBUser.h"
+#include "DBUserMgr.h"
+
+#include "CMaster.h"
 
 #include <ATLComTime.h>
+#include "Transaction.h"
 
 #include "GlobalDef/GlobalDef.h"
-

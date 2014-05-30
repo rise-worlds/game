@@ -34,7 +34,7 @@ public:
 			return false;
 		}
 
-		WriteBuf	buffer((SGuint8*)ptr, nMaxWriteSize);
+		WriteBuf	buffer((UINT8*)ptr, nMaxWriteSize);
 		pMsg->Pack(buffer);
 
 		return CompleteSend(buffer.GetReadSize(), pMsg->GetMsgID());
@@ -78,7 +78,7 @@ private:
 class CSvrLinkMgr
 {
 public:
-	static CSvrLinkMgr&	GetSingleton()
+	static CSvrLinkMgr&	GetSingle()
 	{
 		static CSvrLinkMgr s_SvrLinkMgr;
 		return s_SvrLinkMgr;
@@ -166,7 +166,7 @@ public:
 		LEAVE_FUNCTION_FOXNET
 	}
 
-	CSvrSession*	GetSvrLinkByTypeID(eServerType type, SGuint8 ID)
+	CSvrSession*	GetSvrLinkByTypeID(eServerType type, UINT8 ID)
 	{
 		ENTER_FUNCTION_FOXNET
 
@@ -271,7 +271,7 @@ inline void	CSvrSession::OnDisconnect()
 }
 
 #define REGISTER_SVRSESSION(type, x)	\
-	SGCommon::CRegisterHelper<x>	g_SvrSessionRegister_##x; \
+	Common::CRegisterHelper<x>	g_SvrSessionRegister_##x; \
 	struct SvrSessionRegister_##x \
 	{ \
 		SvrSessionRegister_##x() \

@@ -5,6 +5,7 @@
 
 #include "../Utility/CommonDefs.h"
 #include "../Utility/Single.h"
+#include "../ServerMsgDef/IDAllocFactory.h"
 
 class ClientLink;
 
