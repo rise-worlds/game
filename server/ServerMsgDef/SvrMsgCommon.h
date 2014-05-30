@@ -2,8 +2,8 @@
 #define __SVRMSGCOMMON_H__
 #include "common/GlobalDefine.h"
 #include "common/Packet.h"
-#include "common/GameTime/GameTime.h"
 #include "SvrMsgID.h"
+#include "Utility/GameTime.h"
 // 服务器消息版本号
 const int	SVRMSG_VERSION		= 0;
 
@@ -46,7 +46,7 @@ enum eLinkState
 
 inline UINT32	MakeTempUserID(UINT8 nSvrType, UINT8 nSvrID, UINT16 nTempID)
 {
-	return SGCommon::MakeUInt32(SGCommon::MakeUInt16(nSvrType, nSvrID), nTempID);
+	return Common::MakeUInt32(Common::MakeUInt16(nSvrType, nSvrID), nTempID);
 }
 
 inline UINT8	MakeSvrID(UINT32 nID, UINT32 nAmount)

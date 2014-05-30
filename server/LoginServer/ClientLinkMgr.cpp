@@ -1,5 +1,6 @@
 #include "ClientLinkMgr.h"
 #include "../Utility/FunctionGuard.h"
+#include "../Utility/Log.h"
 
 ClientLinkMgr::ClientLinkMgr()
 {
@@ -37,7 +38,7 @@ ClientLink*	ClientLinkMgr::AllocClient()
 {
 	ENTER_FUNCTION_FOXNET
 
-	ClientLink*	pClientLink = SGExternNew(ClientLink);
+	ClientLink*	pClientLink = new ClientLink;
 	if (!pClientLink)
 	{
 		ERRMSG("分配客户端连接出错");
@@ -52,7 +53,7 @@ ClientLink*	ClientLinkMgr::AllocClient()
 	{
 		ERRMSG("临时客户端ID重复分配了 %d 可能因为分配完了", nTempID);
 
-		SGExternDelete(pClientLink);
+		delete pClientLink;
 		m_TempClientIDAlloc.FreeID(nTempID);
 		return NULL;
 	}

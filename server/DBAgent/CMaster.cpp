@@ -9,12 +9,12 @@
 //-------------------------------------------------------------------------------------------------
 NetObject* CreateAcceptedObject()
 {
-	return CSvrLinkMgr::GetSingleton().AllocSession(eSvrType_Temp);
+	return CSvrLinkMgr::GetSingle().AllocSession(eSvrType_Temp);
 }
 
 void DestroyAcceptedObject(NetObject *pNetworkObject)
 {
-	CSvrLinkMgr::GetSingleton().FreeSession((CSvrSession*)pNetworkObject);
+	CSvrLinkMgr::GetSingle().FreeSession((CSvrSession*)pNetworkObject);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ void Console_Test(const char*)
 
 void Console_BugCount(const char* strCmd)
 {
-	Common::CDebugInfoHelper::getSingleton().BugCount();
+	Common::CDebugInfoHelper::getSingle().BugCount();
 }
 
 unsigned int MyGetTime()
@@ -60,7 +60,7 @@ bool	CMaster::Init()
 
 	// Init Console Callback
 	{
-		Common::SConsoleCmd	consoleCMD[] =
+		Common::ConsoleCmd	consoleCMD[] =
 		{
 			{ "GetVer", &Console_GetVer, "版本号" },
 			{ "Test", &Console_Test, "" },
@@ -94,7 +94,7 @@ bool	CMaster::Init()
 		}
 	}
 
-	m_pOTLDatabase = new COTLDatabase;
+	m_pOTLDatabase = new COTLDataBase;
 	// 	CONNECT_INFO	info;
 	// 	info.nTimeOut	= 5;
 	// 	strcpy(info.strConnect, "sa/ubuntu@test1");
@@ -138,9 +138,9 @@ bool	CMaster::Init()
 bool	CMaster::Terminate()
 {
 	ENTER_FUNCTION_FOXNET
-		if (Df_DBUserMgr.getSingletonPtr())
+		if (Df_DBUserMgr.getSinglePtr())
 		{
-		delete Df_DBUserMgr.getSingletonPtr();
+		delete Df_DBUserMgr.getSinglePtr();
 		}
 
 	if (m_pOTLDatabase)
@@ -170,11 +170,11 @@ void	CMaster::Update()
 
 	if (m_CheckConnectTimer.IsExpired())
 	{
-		CSvrSession* pSession = CSvrLinkMgr::GetSingleton().GetSvrLinkByType(eSvrType_Config);
+		CSvrSession* pSession = CSvrLinkMgr::GetSingle().GetSvrLinkByType(eSvrType_Config);
 		if (!pSession)
 		{
-			pSession = CSvrLinkMgr::GetSingleton().AllocSession(eSvrType_Config);
-			CSvrLinkMgr::GetSingleton().AddSvrLink(pSession);
+			pSession = CSvrLinkMgr::GetSingle().AllocSession(eSvrType_Config);
+			CSvrLinkMgr::GetSingle().AddSvrLink(pSession);
 		}
 
 		if (pSession->GetLinkState() == eLinkState_Disconnect)
@@ -201,8 +201,8 @@ void	CMaster::Update()
 			char szName[64] = "";
 			sprintf_s(szName, "ActionLog%u", m_tCurActionLogTable);
 			m_strActionLogTable = szName;
-			CTransaction_CreateActionLogTable* pTransaction = new CTransaction_CreateActionLogTable;
-			this->GetOTLDatabase().AddTransaction(pTransaction);
+			//CTransaction_CreateActionLogTable* pTransaction = new CTransaction_CreateActionLogTable;
+			//this->GetOTLDatabase().AddTransaction(pTransaction);
 		}
 
 	}
@@ -255,8 +255,8 @@ bool	CMaster::InitDatabase(int nThreadAmount, CONNECT_INFO* ptr, int nAmount)
 	sprintf_s(szName, "ActionLog%u", m_tCurActionLogTable);
 	m_strActionLogTable = szName;
 
-	CTransaction_CreateActionLogTable* pTransaction = new CTransaction_CreateActionLogTable;
-	this->GetOTLDatabase().AddTransaction(pTransaction);
+	//CTransaction_CreateActionLogTable* pTransaction = new CTransaction_CreateActionLogTable;
+	//this->GetOTLDatabase().AddTransaction(pTransaction);
 	return bOK;
 }
 const char* CMaster::GetActionLogTable()

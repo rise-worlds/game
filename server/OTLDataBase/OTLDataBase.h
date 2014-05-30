@@ -1,6 +1,20 @@
 ﻿#ifndef __OTLDATABASE_H__
 #define __OTLDATABASE_H__
 
+#if defined(_WIN32)
+
+#if defined(OTLDATABASE_EXPORTS)
+#define OTLDATABASE_API __declspec(dllexport)
+#else
+#define OTLDATABASE_API __declspec(dllimport)
+#endif
+
+#else
+
+#define OTLDATABASE_API
+
+#endif
+
 #define OTL_ODBC_MSSQL_2005
 #define OTL_STL
 
@@ -27,7 +41,7 @@ class CDBWorkThread;
 #pragma warning(push)
 #pragma warning(disable: 4251)
 
-class COMMON_API COTLDataBase {
+class OTLDATABASE_API COTLDataBase {
 public:
 	COTLDataBase(void);
 	virtual ~COTLDataBase();

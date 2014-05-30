@@ -64,7 +64,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>"libtcmalloc_minimal.lib" /INCLUDE:"__tcmalloc" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalLibraryDirectories>..\..\PublicLib\gperftools\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\PublicLib\gperftools\;$(SolutionDir)Bin\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

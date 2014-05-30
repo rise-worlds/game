@@ -58,7 +58,7 @@ public:
 	template <typename T> 
 	void append(const T& value) 
 	{
-		append((SGuint8 *)&value, sizeof(value));
+		append((UINT8 *)&value, sizeof(value));
 	}
 
 	template <typename T>

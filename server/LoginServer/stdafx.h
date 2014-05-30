@@ -3,15 +3,13 @@
 // 特定于项目的包含文件
 //
 
-#pragma once
-
+#ifndef __STDAFX_H__
+#define __STDAFX_H__
 
 #include <stdio.h>
 #include <tchar.h>
+#include <vector>
 
-
-
-#include "../CommonInc/BaseCode/BaseCode.h"
 #include "Utility/Utility.h"
 
 #include "AsioNetwork/NetObject.h"
@@ -22,12 +20,13 @@
 
 #include "ServerMsgDef/SvrLinkMgr.h"
 
-#include "ServerMsgDef/SvrMsg_WorldServer.h"
-#include <vector>
-
 #include "Master.h"
 
 #include <ATLComTime.h>
 
-#include "GlobalDef/GlobalDef.h"
+#include "common/Packet.h"
+#include "common/NetworkMsgRegister.h"
+#include "common/Version.h"
+#include "common/NetMsgID.h"
 
+#endif

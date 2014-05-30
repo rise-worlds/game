@@ -9,10 +9,10 @@ class NetObject;
 struct MsgHead
 {
 public:
-	SGuint16	nMsgID;
+	UINT16	nMsgID;
 	//SGuint16	size;
 	//SGuint16	nLevel;
-	SGuint16		GetMsgID()
+	UINT16		GetMsgID()
 	{
 		return nMsgID;
 	}
@@ -29,12 +29,12 @@ public:
 	virtual	void	Pack(WriteBuf& buffer)
 	{
 		buffer << nMsgID;
-// 		buffer.append((Sg_UInt8*)m_szBuffer, this->GetPackSize() - sizeof(MsgHead));
+// 		buffer.append((UINT8*)m_szBuffer, this->GetPackSize() - sizeof(MsgHead));
 	}
 	virtual	void	UnPack(ReadBuf& buffer)
 	{
 		buffer >> nMsgID;
-// 		buffer.read((Sg_UInt8*)m_szBuffer, this->GetPackSize() - sizeof(MsgHead));
+// 		buffer.read((UINT8*)m_szBuffer, this->GetPackSize() - sizeof(MsgHead));
 	}
 	virtual	int		GetPackSize()
 	{

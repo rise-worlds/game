@@ -4,6 +4,7 @@
 #include <vector>
 #include <bitset>
 #include "Packet.h"
+#include "PacketDefine.h"
 #include "GlobalDefine.h"
 
 #pragma pack(push, 1)

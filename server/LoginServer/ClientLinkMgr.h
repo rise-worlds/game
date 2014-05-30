@@ -10,7 +10,7 @@
 class ClientLink;
 
 
-class ClientLinkMgr : Common::Single<ClientLinkMgr>
+class ClientLinkMgr : public Common::Single<ClientLinkMgr>
 {
 public:
 	ClientLinkMgr();

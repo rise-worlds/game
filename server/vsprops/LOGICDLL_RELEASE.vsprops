@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="LOGICDLL_RELEASE"
+	OutputDirectory="../../../Bin/$(ConfigurationName)/DLL"
+	IntermediateDirectory="../../../Rubbish/$(ConfigurationName)/$(ProjectName)"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		Optimization="2"
+		WholeProgramOptimization="true"
+		AdditionalIncludeDirectories=".;../../CommonInc;../../../.."
+		PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL"
+		RuntimeLibrary="2"
+		UsePrecompiledHeader="0"
+		WarningLevel="3"
+		Detect64BitPortabilityProblems="true"
+		DebugInformationFormat="3"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="LuaPlus.lib SceneServer.lib AsioNetwork.lib SGutility.lib SGobjectmgr.lib SGscript.lib GameTime.lib"
+		OutputFile="$(OutDir)\$(ProjectName).dll"
+		LinkIncremental="1"
+		AdditionalLibraryDirectories="../../Lib/$(ConfigurationName)"
+		GenerateManifest="false"
+		GenerateDebugInformation="true"
+		SubSystem="1"
+		OptimizeReferences="2"
+		EnableCOMDATFolding="2"
+		LinkTimeCodeGeneration="1"
+		ImportLibrary="../../Lib/$(ConfigurationName)/$(ProjectName).lib"
+	/>
+</VisualStudioPropertySheet>

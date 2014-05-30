@@ -5,7 +5,7 @@
 
 #define DBTransactionSuccess	(-1)
 
-class DBTransaction
+class OTLDATABASE_API DBTransaction
 {
 public:
 	DBTransaction();

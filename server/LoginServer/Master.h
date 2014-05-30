@@ -56,5 +56,6 @@ private:
 };
 
 #define Df_Master CMaster::getSingle()
+const int	CLIENT_IOHANDLER_KEY = 0;
 
 #endif

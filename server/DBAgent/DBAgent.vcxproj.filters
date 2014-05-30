@@ -35,6 +35,9 @@
     <ClInclude Include="Transaction.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\ServerMsgDef\SvrMsgRegister.cpp">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DBAgent.cpp">

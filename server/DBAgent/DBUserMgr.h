@@ -27,6 +27,6 @@ private:
 	DBUSER_IDMAP	m_AccountIDMap;
 };
 
-#define Df_DBUserMgr	CDBUserMgr::getSingleton()
+#define Df_DBUserMgr	CDBUserMgr::getSingle()
 
 #endif

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DBUserMgr.h"
-#include "../CommonInc/BaseCode/BaseCode.h"
+
 CDBUserMgr::CDBUserMgr()
 {
 

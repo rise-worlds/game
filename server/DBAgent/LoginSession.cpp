@@ -33,10 +33,9 @@ void	LoginSession::OnRecv(void *pMsg, INT16 nSize)
 	case eSvrMsg_CheckLogin_DBSvr:
 	{
 		CTransaction_CheckLogin* pTransaction = new CTransaction_CheckLogin;
-		pTransaction->checklogin = (SvrMsg_CheckLogin_DBSvr*)pPack;
+		//pTransaction->checklogin = (SvrMsg_CheckLogin_DBSvr*)pPack;
 
 		Df_Master.GetOTLDatabase().AddTransaction(pTransaction);
-
 	}
 		break;
 	default:

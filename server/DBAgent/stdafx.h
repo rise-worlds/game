@@ -11,7 +11,6 @@
 
 
 
-#include "../CommonInc/BaseCode/BaseCode.h"
 #include "Utility/Utility.h"
 
 #include "AsioNetwork/NetObject.h"
@@ -22,7 +21,6 @@
 
 #include "ServerMsgDef/SvrLinkMgr.h"
 
-#include "ServerMsgDef/SvrMsg_WorldServer.h"
 #include <vector>
 
 #include "DBUser.h"
@@ -33,4 +31,3 @@
 #include <ATLComTime.h>
 #include "Transaction.h"
 
-#include "GlobalDef/GlobalDef.h"
