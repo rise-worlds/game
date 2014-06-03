@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<ConfigInfo>
+
+<DataBase>
+<ServerDB ConnectStr="Driver={SQL Server};DataBase=ServerDB;Server=192.168.1.3,1433;Uid=sa;Pwd=ubuntu" TimeOut="5" />
+<AccountDB ConnectStr="Driver={SQL Server};DataBase=AccountDB;Server=192.168.1.3,1433;Uid=sa;Pwd=ubuntu" TimeOut="5" />
+</DataBase>
+
+<DBServer>
+<Info ID="1" IP="127.0.0.1" ListenPort="7001" />
+</DBServer>
+
+<LoginServer>
+<Info ID="1" IP="127.0.0.1" ListenClientPort="7003" ListenWorldPort="7004" DBSvrID="1" />
+</LoginServer>
+
+<WorldServer>
+<Info ID="1" IP="127.0.0.1" ListenScenePort="7005" DBSvrID="1" />
+</WorldServer>
+
+<SceneServer>
+
+<Info ID="1" IP="127.0.0.1" ListenPort="7009" MaxClient="10000" DBSvrID="1">
+<Map ID="1" />
+<Map ID="2" />
+<Map ID="3" />
+<Map ID="4" />
+<Map ID="5" />
+<Map ID="6" />
+<Map ID="7" />
+<Map ID="8" />
+<Map ID="9" />
+<Map ID="10" />
+<Map ID="11" />
+<Map ID="12" />
+<Map ID="13" />
+<Map ID="14" />
+<Map ID="15" />
+</Info>
+
+<Info ID="2" IP="127.0.0.1" ListenPort="7010" MaxClient="10000" DBSvrID="1">
+<Map ID="1" />
+<Map ID="2" />
+<Map ID="3" />
+<Map ID="4" />
+<Map ID="5" />
+<Map ID="6" />
+<Map ID="7" />
+<Map ID="8" />
+<Map ID="9" />
+<Map ID="10" />
+<Map ID="11" />
+<Map ID="12" />
+<Map ID="13" />
+<Map ID="14" />
+<Map ID="15" />
+</Info>
+
+</SceneServer>
+
+</ConfigInfo>
