@@ -64,7 +64,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>"libtcmalloc_minimal.lib" /INCLUDE:"__tcmalloc" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalLibraryDirectories>..\..\PublicLib\gperftools\;$(SolutionDir)Bin\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\PublicLib\gperftools\;..\..\PublicLib\boost\lib\vc12_x86;$(SolutionDir)Bin\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Utility.lib;OTLDataBase.lib;AsioNetwork.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -97,6 +98,12 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\NetworkMsgRegister.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\ServerMsgDef\SvrMsgRegister.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="ClientLink.cpp" />
     <ClCompile Include="ClientLinkMgr.cpp" />
     <ClCompile Include="DBAgentSession.cpp" />

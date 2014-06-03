@@ -222,7 +222,7 @@ public:
 
 		if (m_AllSvrLink[type][ID])
 		{
-			printf("?????????? IP[%s] Type[%s] ID[%d]\n", pServerLink->GetIP(), SERVERNAME[type], ID);
+			printf("服务重复注册 IP[%s] Type[%s] ID[%d]\n", pServerLink->GetIP(), SERVERNAME[type], ID);
 			pServerLink->SetServerID(0);
 			pServerLink->Disconnect();
 			return;
@@ -230,7 +230,7 @@ public:
 
 		m_AllSvrLink[type][ID]	= pServerLink;
 
-		printf("????????? IP[%s] Type[%s] ID[%d]\n", pServerLink->GetIP(), SERVERNAME[type], ID);
+		printf("服务注册成功 IP[%s] Type[%s] ID[%d]\n", pServerLink->GetIP(), SERVERNAME[type], ID);
 
 		LEAVE_FUNCTION_FOXNET
 	}
@@ -250,13 +250,13 @@ public:
 
 		if (!m_AllSvrLink[type][ID])
 		{
-			printf("????????????\n");
+			printf("释放不存在的服务\n");
 			return;
 		}
 
 		m_AllSvrLink[type][ID]	= NULL;
 
-		printf("????ж???? IP[%s] Type[%s] ID[%d]\n", pServerLink->GetIP(), SERVERNAME[type], ID);
+		printf("服务卸载成功 IP[%s] Type[%s] ID[%d]\n", pServerLink->GetIP(), SERVERNAME[type], ID);
 
 		LEAVE_FUNCTION_FOXNET
 	}

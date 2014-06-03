@@ -15,17 +15,17 @@ BEGINNAMESPACE
 #ifdef FUNCTION_GUARD
 
 #define ENTER_FUNCTION_FOXNET try {
-#define LEAVE_FUNCTION_FOXNET } catch(...) { Common::CDebugInfoHelper::getSingleton().OnCatch(); }
-#define LEAVE_FUNCTION_RETURN_0 } catch(...) { Common::CDebugInfoHelper::getSingleton().OnCatch(); return 0;}
-#define LEAVE_FUNCTION_RETURN_FALSE } catch(...) { Common::CDebugInfoHelper::getSingleton().OnCatch(); return false;}
-#define LEAVE_FUNCTION_RETURN_NULL } catch(...) { Common::CDebugInfoHelper::getSingleton().OnCatch(); return NULL;}
+#define LEAVE_FUNCTION_FOXNET } catch(...) { Common::CDebugInfoHelper::getSingle().OnCatch(); }
+#define LEAVE_FUNCTION_RETURN_0 } catch(...) { Common::CDebugInfoHelper::getSingle().OnCatch(); return 0;}
+#define LEAVE_FUNCTION_RETURN_FALSE } catch(...) { Common::CDebugInfoHelper::getSingle().OnCatch(); return false;}
+#define LEAVE_FUNCTION_RETURN_NULL } catch(...) { Common::CDebugInfoHelper::getSingle().OnCatch(); return NULL;}
 #else
 
-#define ENTER_FUNCTION_FOXNET {
-#define LEAVE_FUNCTION_FOXNET }
-#define LEAVE_FUNCTION_RETURN_0 }
-#define LEAVE_FUNCTION_RETURN_FALSE }
-#define LEAVE_FUNCTION_RETURN_NULL }
+#define ENTER_FUNCTION_FOXNET
+#define LEAVE_FUNCTION_FOXNET
+#define LEAVE_FUNCTION_RETURN_0 return 0;
+#define LEAVE_FUNCTION_RETURN_FALSE return false;
+#define LEAVE_FUNCTION_RETURN_NULL return NULL;
 #endif
 
 #pragma warning(push)

@@ -40,6 +40,12 @@
     <Filter Include="XMLParse">
       <UniqueIdentifier>{704c7748-3449-443c-b273-daf1719e1a3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PostMortem">
+      <UniqueIdentifier>{fa2687a4-800a-493f-8430-043d6a983709}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{fcf403e1-100b-4d20-b3ee-5237ab889c6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -87,9 +93,6 @@
     <ClInclude Include="FileSystemUtil.h">
       <Filter>FileSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Ini.h">
-      <Filter>FileSystem</Filter>
-    </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>FileSystem</Filter>
     </ClInclude>
@@ -98,6 +101,18 @@
     </ClInclude>
     <ClInclude Include="LTModule.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PostMortem.h">
+      <Filter>PostMortem</Filter>
+    </ClInclude>
+    <ClInclude Include="Ini.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="XmlConfig.h">
+      <Filter>Config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,9 +140,6 @@
     <ClCompile Include="FileSystemUtil.cpp">
       <Filter>FileSystem</Filter>
     </ClCompile>
-    <ClCompile Include="Ini.cpp">
-      <Filter>FileSystem</Filter>
-    </ClCompile>
     <ClCompile Include="Log.cpp">
       <Filter>FileSystem</Filter>
     </ClCompile>
@@ -136,6 +148,18 @@
     </ClCompile>
     <ClCompile Include="LTModule.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PostMortem.cpp">
+      <Filter>PostMortem</Filter>
+    </ClCompile>
+    <ClCompile Include="Ini.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
+    <ClCompile Include="XmlConfig.cpp">
+      <Filter>Config</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

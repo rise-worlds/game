@@ -56,7 +56,7 @@ enum
 {
 	eMsg_ClientLoadSuccess_GC = BaseMsgID_GateToClient,
 
-	eMsg_MaxCount,
+	eMsg_MaxCount
 };
 #pragma pack(pop)
 #endif

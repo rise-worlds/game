@@ -1,10 +1,6 @@
 ﻿#include "stdafx.h"
 #include "Master.h"
-#include "../AsioNetwork/AsioNetwork.h"
-#include "../Utility/Ini.h"
-#include "../Utility/Console.h"
-#include "../Utility/FunctionGuard.h"
-#include "../Utility/Log.h"
+#include "common/Version.h"
 #include "ClientLinkMgr.h"
 #include "mmsystem.h"
 #pragma comment(lib, "winmm.lib")
@@ -203,9 +199,9 @@ bool	CMaster::Terminate()
 		m_pAsioNetwork = NULL;
 		}
 
-	if (Df_ClientLinkMgr.getSingletonPtr())
+	if (Df_ClientLinkMgr.getSinglePtr())
 	{
-		delete Df_ClientLinkMgr.getSingletonPtr();
+		delete Df_ClientLinkMgr.getSinglePtr();
 	}
 
 	return true;
@@ -223,11 +219,11 @@ void	CMaster::Update()
 	//	m_loginObserve.Update();
 	if (m_CheckConnectTimer.IsExpired())
 	{
-		CSvrSession* pSession = CSvrLinkMgr::GetSingleton().GetSvrLinkByType(eSvrType_Config);
+		CSvrSession* pSession = CSvrLinkMgr::GetSingle().GetSvrLinkByType(eSvrType_Config);
 		if (!pSession)
 		{
-			pSession = CSvrLinkMgr::GetSingleton().AllocSession(eSvrType_Config);
-			CSvrLinkMgr::GetSingleton().AddSvrLink(pSession);
+			pSession = CSvrLinkMgr::GetSingle().AllocSession(eSvrType_Config);
+			CSvrLinkMgr::GetSingle().AddSvrLink(pSession);
 		}
 
 		if (pSession->GetLinkState() == eLinkState_Disconnect)
@@ -238,12 +234,12 @@ void	CMaster::Update()
 
 		if (GetDBSvrID() != 0)
 		{
-			pSession = CSvrLinkMgr::GetSingleton().GetSvrLinkByType(eSvrType_DBAgent);
+			pSession = CSvrLinkMgr::GetSingle().GetSvrLinkByType(eSvrType_DBAgent);
 			if (!pSession)
 			{
-				pSession = CSvrLinkMgr::GetSingleton().AllocSession(eSvrType_DBAgent);
+				pSession = CSvrLinkMgr::GetSingle().AllocSession(eSvrType_DBAgent);
 				pSession->SetServerID(GetDBSvrID());
-				CSvrLinkMgr::GetSingleton().AddSvrLink(pSession);
+				CSvrLinkMgr::GetSingle().AddSvrLink(pSession);
 			}
 
 			if (pSession->GetLinkState() == eLinkState_Disconnect)

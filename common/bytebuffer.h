@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __ByteBuffer_H__
+#define __ByteBuffer_H__
 
 #include <assert.h>
 
@@ -285,3 +286,5 @@ private:
 
 #define GetDataByPack(pack, type, name, init)	type name(init); pack >> name;
 #define FillDataByPack(pack, type, value) { type temp; pack >> temp; value = temp; }
+
+#endif

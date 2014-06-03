@@ -2,11 +2,12 @@
 //
 
 #include "stdafx.h"
-#include "Master.h"
-#include "../Utility/CThread.h"
-#include "../Utility/FunctionGuard.h"
-#include "../Utility/Log.h"
-#include "../Utility/Console.h"
+
+#ifdef _WIN32
+#include "Utility/PostMortem.h"
+#endif
+
+#define ApplicationName	"LoginServer"
 
 class CMyService
 {
@@ -49,8 +50,6 @@ public:
 		pMaster->Terminate();
 		delete pMaster;
 		pMaster = NULL;
-
-		DumpLeak("", ApplicationName);
 
 		LEAVE_FUNCTION_FOXNET
 	}

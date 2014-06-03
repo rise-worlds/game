@@ -22,13 +22,13 @@ public:
 
 	inline static type& getSingle()
 	{
-		assert(NULL == ms_single);
+		assert(ms_single);
 		return *ms_single;
 	}
 
 	inline static type* getSinglePtr()
 	{
-		assert(NULL == ms_single);
+		assert(ms_single);
 		return ms_single;
 	}
 protected:

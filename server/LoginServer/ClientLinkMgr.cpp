@@ -1,6 +1,5 @@
+#include "stdafx.h"
 #include "ClientLinkMgr.h"
-#include "../Utility/FunctionGuard.h"
-#include "../Utility/Log.h"
 
 ClientLinkMgr::ClientLinkMgr()
 {
@@ -29,6 +28,7 @@ ClientLinkMgr::~ClientLinkMgr()
 	{
 		ClientLink* pClientLink = *it;
 		pClientLink->Disconnect();
+		delete pClientLink;
 	}
 
 	LEAVE_FUNCTION_FOXNET
@@ -93,8 +93,7 @@ void		ClientLinkMgr::FreeClient(ClientLink* pClientLink)
 		m_AccountIDToPtrMap.erase(nAccountID);
 	}
 
-	SGExternDelete(pClientLink);
-
+	delete(pClientLink);
 	LEAVE_FUNCTION_FOXNET
 }
 //从临时链接队列里查找指定的玩家的链接

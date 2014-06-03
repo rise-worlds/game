@@ -1,11 +1,7 @@
 #ifndef __CLIENTLNKMGR_H__
 #define __CLIENTLNKMGR_H__
-#include <hash_map>
-#include <hash_set>
 
-#include "../Utility/CommonDefs.h"
-#include "../Utility/Single.h"
-#include "../ServerMsgDef/IDAllocFactory.h"
+#include "ServerMsgDef/IDAllocFactory.h"
 
 class ClientLink;
 

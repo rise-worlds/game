@@ -9,24 +9,24 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <vector>
+#include <hash_map>
+#include <hash_set>
+#include <bitset>
 
-#include "Utility/Utility.h"
 
 #include "AsioNetwork/NetObject.h"
 #include "AsioNetwork/AsioNetwork.h"
 
-#include "OTLDataBase/OTLDataBase.h"
-#include "OTLDataBase/DBTransaction.h"
-
 #include "ServerMsgDef/SvrLinkMgr.h"
+
+#include "common/GlobalDefine.h"
+#include "common/NetworkMsgDef.h"
+#include "common/Version.h"
+
+#include "ClientLink.h"
+#include "ClientLinkMgr.h"
 
 #include "Master.h"
 
-#include <ATLComTime.h>
-
-#include "common/Packet.h"
-#include "common/NetworkMsgRegister.h"
-#include "common/Version.h"
-#include "common/NetMsgID.h"
 
 #endif

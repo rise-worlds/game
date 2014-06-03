@@ -110,10 +110,9 @@ inline T min(T a, T b) {return (a > b) ? a : b;}
 #define DF_PROPERTY(type, name)		private: \
 										type m_##name; \
 										public: \
-										type Get##name() \
-										{ return m_##name; } \
-											void Set##name(type value) \
-										{ m_##name = value;}
+										type Get##name() { return m_##name; } \
+										void Set##name(type value) { m_##name = value;}
+
 #define FOREACH_IT(type, name, it) for (type::iterator it = (name).begin(); it != (name).end(); it++)
 #define FOREACH_COUNT(name, begin, end) for (int name = int(begin); (name) < int(end); (name)++)
 #define MAP_FIND(type, name, it, value)	type::iterator it = name.find(value); \
@@ -121,9 +120,11 @@ inline T min(T a, T b) {return (a > b) ? a : b;}
 
 #define MAX_PATH 260
 
-#define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=NULL; } }
-#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=NULL; } }
-#define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=NULL; } }
+#define SAFE_FREE(p)			do { if (p) free(p); p = NULL; } while (0);
+#define SAFE_DELETE(p)			do { if(p) { delete (p);     (p)=NULL; } } while (0);
+#define SAFE_DELETE_ARRAY(p)	do { if(p) { delete[] (p);   (p)=NULL; } } while (0);
+#define SAFE_RELEASE(p)			do { if(p) { (p)->Release(); (p)=NULL; } } while (0);
+
 
 #define M_PI (3.14159265358979323846f)
 

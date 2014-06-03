@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CThread.h"
 #include "assert.h"
 #include <stdlib.h>

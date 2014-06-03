@@ -5,7 +5,7 @@
 // Go to www.firstobject.com for the latest CMarkup and EDOM documentation
 // Use in commercial applications requires written permission
 // This software is provided "as is", with no warranty.
-
+#include "stdafx.h"
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>

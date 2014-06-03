@@ -2,10 +2,10 @@
 #define __MASTER_H__
 
 #include <string>
-#include "../Utility/CommonDefs.h"
-#include "../Utility/Single.h"
-#include "../Utility/CTimer.h"
-#include "../../common/bytebuffer.h"
+#include "Utility/CommonDefs.h"
+#include "Utility/Single.h"
+#include "Utility/CTimer.h"
+#include "common/bytebuffer.h"
 
 class AsioNetwork;
 
@@ -56,6 +56,7 @@ private:
 };
 
 #define Df_Master CMaster::getSingle()
-const int	CLIENT_IOHANDLER_KEY = 0;
+const int	SERVER_IOHANDLER_KEY = 0;
+const int	CLIENT_IOHANDLER_KEY = 1;
 
 #endif

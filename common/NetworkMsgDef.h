@@ -6,6 +6,7 @@
 #include "Packet.h"
 #include "PacketDefine.h"
 #include "GlobalDefine.h"
+#include "NetMsgID.h"
 
 #pragma pack(push, 1)
 

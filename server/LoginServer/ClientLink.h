@@ -13,21 +13,14 @@ enum eClientLinkState
 
 #define KICK_WAIT_TIMER	(1000*60*3)
 
-#include "../Utility/CommonDefs.h"
-#include "../AsioNetwork/NetObject.h"
-#include <string>
-
-class PackCommon;
-
 class ClientLink : public NetObject
 {
 public:
 	ClientLink();
-	~ClientLink();
+	virtual ~ClientLink();
 
 	bool SendMsg(PackCommon* pPack);
-	void SetWorldSvrKick();
-	bool CheckWorldSvrKick();
+
 protected:
 	virtual void	OnAccept(unsigned int nNetworkIndex);
 	virtual void	OnDisconnect();
@@ -37,7 +30,7 @@ protected:
 	DF_PROPERTY(UINT16, TempClientID);
 	DF_PROPERTY(UINT32, AccountID);
 	DF_PROPERTY(UINT32, KickTimer);
-
+	
 	DF_PROPERTY(UINT8, WorldSvrID);
 
 	DF_PROPERTY(UINT32, DBLoginCode);
@@ -45,6 +38,9 @@ protected:
 	DF_PROPERTY(std::string, Password);
 private:
 	bool m_bWorldSvrKick;
+public:
+	void SetWorldSvrKick();
+	bool CheckWorldSvrKick();
 };
 
 

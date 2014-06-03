@@ -85,7 +85,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ServerMsgDef\SvrMsgRegister.cpp" />
+    <ClCompile Include="..\ServerMsgDef\SvrMsgRegister.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClInclude Include="CMaster.h" />
     <ClInclude Include="DBAgent.h" />
     <ClInclude Include="DBUser.h" />

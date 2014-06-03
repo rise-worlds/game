@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CTimer.h"
 #include "CThread.h"
 #include <time.h>

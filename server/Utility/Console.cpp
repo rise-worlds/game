@@ -1,10 +1,7 @@
+#include "stdafx.h"
 #include "Console.h"
 #include "CThread.h"
-#include <vector>
-#include <string>
-#include <memory.h>
-#include <string.h>
-#include <stdio.h>
+
 #if defined _WIN32
 #include <conio.h>
 #else
@@ -95,7 +92,11 @@ protected:
 
 		while (m_bExit != true)
 		{
+#ifndef _WIN32
 			if (kbhit())
+#else
+			if (_kbhit())
+#endif
 			{
 				gets(cmd);
 

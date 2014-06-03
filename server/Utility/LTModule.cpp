@@ -9,6 +9,7 @@
 //
 //****************************************************************************************
 //the lithtech module headers.
+#include "stdafx.h"
 #include "LTModule.h"
 #include <sstream>
 #include <string.h>

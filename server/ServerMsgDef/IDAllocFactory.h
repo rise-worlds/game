@@ -1,5 +1,6 @@
 #ifndef __IDALLOCFACTORY_H__
 #define __IDALLOCFACTORY_H__
+#include <vector>
 
 template<class T, int INIT_ID	= 1>
 class IDAllocFactory

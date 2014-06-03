@@ -47,11 +47,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;COMMON_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../;../../;../../PublicLib/boost/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -91,12 +92,15 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="LTModule.h" />
     <ClInclude Include="MarkupSTL.h" />
+    <ClInclude Include="PostMortem.h" />
     <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="RingBufferEx.h" />
     <ClInclude Include="ShareMem.h" />
     <ClInclude Include="Single.h" />
     <ClInclude Include="StackWalker.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="XmlConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Console.cpp" />
@@ -115,10 +119,17 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="LTModule.cpp" />
     <ClCompile Include="MarkupSTL.cpp" />
+    <ClCompile Include="PostMortem.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="ShareMem.cpp" />
     <ClCompile Include="StackWalker.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="XmlConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
