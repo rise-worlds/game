@@ -1,11 +1,6 @@
 #ifndef __Version_H__
 #define __Version_H__
 
-//#define v1					1
-//#define v2					0
-//#define v3					6
-//#define v4					1
-
 #define MAKE_VER(v1, v2, v3, v4)	(MAKELONG(MAKEWORD(v1, v2), MAKEWORD(v3, v4)))
 #define VER_STR(v1, v2, v3, v4)		#v1 "." #v2 "." #v3 "." #v4;
 

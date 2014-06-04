@@ -2,8 +2,12 @@
 #include "Master.h"
 #include "common/Version.h"
 #include "ClientLinkMgr.h"
+#ifdef _WIN32
 #include "mmsystem.h"
 #pragma comment(lib, "winmm.lib")
+#else
+#include <time.h>
+#endif
 
 //-------------------------------------------------------------------------------------------------
 // Network Callback Functions
@@ -83,7 +87,17 @@ void Console_StopAcceptClient(const char* strCmd)
 
 unsigned int MyGetTime()
 {
+#ifdef _WIN32
 	return timeGetTime();
+#else
+	UINT32 uptime = 0;
+	struct timespec on;
+	if (clock_gettime(CLOCK_MONOTONIC, &on) == 0)
+	{
+		uptime = on.tv_sec * 1000 + on.tv_nsec / 1000000;
+	}
+	return uptime;
+#endif
 }
 
 bool	CMaster::Init()
