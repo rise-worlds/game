@@ -1,0 +1,4 @@
+2
+D:\project\as3_client\game\bin\asserts
+D:\project\as3_client\game\bin\asserts\data,data
+D:\project\as3_client\game\bin\asserts\revision.txt
