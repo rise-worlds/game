@@ -1,0 +1,23 @@
+
+	  <script name="com/adobe/utils/AGALMiniAssembler" mod="0">
+		<def id="com.adobe.utils:AGALMiniAssembler"/>
+		<dep id="Array" type="e"/>
+		<dep id="Boolean" type="s"/>
+		<dep id="Number" type="e"/>
+		<dep id="Object" type="i"/>
+		<dep id="RegExp" type="s"/>
+		<dep id="String" type="s"/>
+		<dep id="flash.display3D:Context3D" type="s"/>
+		<dep id="flash.display3D:Program3D" type="e"/>
+		<dep id="flash.utils:ByteArray" type="s"/>
+		<dep id="flash.utils:Dictionary" type="e"/>
+		<dep id="flash.utils:Endian" type="e"/>
+		<dep id="flash.utils:getTimer" type="e"/>
+		<dep id="int" type="s"/>
+		<dep id="trace" type="e"/>
+		<dep id="uint" type="s"/>
+	  </script> 
+	  
+	  
+"$(CompilerPath)\bin\compc.exe" -include-sources "$(ProjectDir)\src\com" -compiler.library-path "$(ProjectDir)\lib\Genome2D_1_0_263.swc" -output "$(OutputFile)"
+"$(CompilerPath)\bin\compc.exe" -include-sources "$(ProjectDir)\src\com" -compiler.include-libraries "$(ProjectDir)\lib\Genome2D_1_0_263.swc" -output "$(OutputFile)"

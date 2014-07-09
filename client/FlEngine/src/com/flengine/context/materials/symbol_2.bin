@@ -1,0 +1,28 @@
+mov vt0, va0
+mul vt0.xy, vt0.xy, vc[va2.y+0].zw
+mul vt1.x, vt0.x, vc[va2.x+0].x
+mul vt2.x, vt0.y, vc[va2.x+0].z
+add vt3.x, vt1.x, vt2.x
+mul vt1.y, vt0.y, vc[va2.x+0].w
+mul vt2.y, vt0.x, vc[va2.x+0].y
+add vt3.y, vt1.y, vt2.y
+add vt0.xy, vt3.xy, vc[va2.y+0].xy
+sub vt1, vt0.xy, vc5.xy
+mul vt1, vt1.xy, vc5.zw
+mov vt4.x, vc4.x
+sin vt2.x, vt4.x
+cos vt2.y, vt4.x
+mul vt3.x, vt1.x, vt2.y
+mul vt3.y, vt1.y, vt2.x
+sub vt4.x, vt3.x, vt3.y
+mul vt3.y, vt1.y, vt2.y
+mul vt3.x, vt1.x, vt2.x
+add vt4.y, vt3.y, vt3.x
+add vt1, vt4.xy, vc4.yz
+mov vt1.zw, vt0.zw
+m44 op, vt1, vc0
+mul vt0.xy, va1.xy, vc[va2.z+0].zw
+add vt0.xy, vt0.xy, vc[va2.z+0].xy
+mov v0, vt0.xy
+mov v1, vc[va2.w+0]
+

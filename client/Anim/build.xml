@@ -1,0 +1,48 @@
+﻿<project name="FlGame-build" basedir="." default="compile_swc">
+	
+	<property environment="env." />
+	
+	<!-- identify properties file -->
+	<property file="build.properties" />
+	<!--
+	<property name="FLEX_HOME" location="${env.FLEX_HOME}" />
+	<property name="APPARAT_HOME" location="${env.APPARAT_HOME}" />
+	<property name="SCALA_HOME" location="${env.SCALA_HOME}" />
+	<property name="FLEX_HOME" location="E:/Soft/FlashDevelop/flex_sdk_4.6.0.23201B" />
+	<property name="mxmlc" value="${FLEX_HOME}/bin/mxmlc"/>
+	-->
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	
+	<!-- Compile Release SWC -->
+	<target name="compile_swc">
+		<echo>[compile] Compiling release SWC</echo>
+		<mkdir dir="${bin.loc}" />
+		<echo>[init] Bin directories created</echo>
+		<echo>[compile] Using Flex SDK at: ${FLEX_HOME}</echo>
+		<fileset dir="${src.loc}" id="src.files">
+			<include name="**\**"/>
+		</fileset>    
+		<!-- 遍历src文件夹下的所有as文件-->
+		<pathconvert property="classes" pathsep=" " dirsep="." refid="src.files">
+			<map from="\" to="/"/>
+			<map from="${src.loc}\" to=""/>
+			<mapper>
+				<chainedmapper>
+					<globmapper from="*.as" to="*"/>
+				</chainedmapper>
+			</mapper>
+		</pathconvert>
+		<echo message="${classes}"/>
+		<compc output="${bin.loc}/Genome2D.swc" include-classes="${classes}" 
+				optimize="true" benchmark="true" strict="true" actionscript-file-encoding="utf-8" 
+				locale="en_US" allow-source-path-overlap="true"
+				use-resource-bundle-metadata="true">
+			<source-path path-element="${src.loc}"/>
+			
+			<compiler.include-libraries dir="${lib.loc}" append="true">
+				<include name="*.swc"/>
+			</compiler.include-libraries>
+		</compc>
+	</target>
+	
+</project>
