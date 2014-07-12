@@ -551,6 +551,10 @@ package com.genome2d.components.renderables.jointanim
                         _local19 = 0;
                         while (true)
                         {
+							if (_local20.animFrameNum < 0) 
+							{
+								break;
+							}
                             _local11 = _JointAnimate.imageVector[_local20.resNum];
                             _local13 = _local24.TransformSrc(_local11.transform, _local24);
                             _local23 = _helpDrawSpriteASrcRect;
