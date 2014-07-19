@@ -1,6 +1,7 @@
 package ;
 
 import com.genome2d.assets.GAssetManager;
+import com.genome2d.assets.GXmlAsset;
 import com.genome2d.components.renderables.GMovieClip;
 import com.genome2d.components.renderables.GSprite;
 import com.genome2d.components.renderables.jointanim.JAnim;
@@ -79,8 +80,10 @@ class Main
         //assetManager.addUrl("atlas_xml", "building1.xml");
         //assetManager.addUrl("atlas_gfx", "cloud.png");
         //assetManager.addUrl("atlas_xml", "cloud.xml");
-        assetManager.addUrl("atlas_gfx", "vs.png");
-        assetManager.addUrl("atlas_xml", "vs.xml");
+        //assetManager.addUrl("atlas_gfx", "vs.png");
+        //assetManager.addUrl("atlas_xml", "vs.xml");
+        assetManager.addUrl("atlas_gfx", "fx19_fx01.png");
+        assetManager.addUrl("atlas_xml", "fx19_fx01.xml");
         assetManager.onAllLoaded.add(assetsInitializedHandler);
         assetManager.load();
     }
@@ -95,30 +98,60 @@ class Main
     private function assetsInitializedHandler():Void {
 		var urlLoader:URLLoader = new URLLoader();
 		urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
-		urlLoader.addEventListener(Event.COMPLETE, g2d_completeHandler);
+		urlLoader.addEventListener(Event.COMPLETE, pam_completeHandler);
 		//urlLoader.addEventListener(IOErrorEvent.IO_ERROR, g2d_ioErrorHandler);
 		//urlLoader.load(new URLRequest("building1.pam"));
 		//urlLoader.load(new URLRequest("cloud.pam"));
-		urlLoader.load(new URLRequest("vs.pam"));
+		//urlLoader.load(new URLRequest("vs.pam"));
+		urlLoader.load(new URLRequest("fx19_fx01.pam"));
 		JAnim.HelpCallInitialize();
     }
 	
-	private function g2d_completeHandler(p_event:Event):Void
+	private var pam_bytes:ByteArray;
+	private var atf_bytes:ByteArray;
+	private function pam_completeHandler(p_event:Event):Void
 	{
-		var g2d_bytes:ByteArray = cast(p_event.target.data, ByteArray);
-		g2d_bytes.endian = Endian.LITTLE_ENDIAN;
-		g2d_bytes.position = 0;
+		pam_bytes = cast(p_event.target.data, ByteArray);
+		pam_bytes.endian = Endian.LITTLE_ENDIAN;
+		pam_bytes.position = 0;
+		
+		var urlLoader:URLLoader = new URLLoader();
+		urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
+		urlLoader.addEventListener(Event.COMPLETE, atf_completeHandler);
+		urlLoader.load(new URLRequest("fx19_fx01.atf"));
+	}
+	
+	
+	//private function g2d_completeHandler(p_event:Event):Void
+	private function atf_completeHandler(p_event:Event):Void
+	{
+		atf_bytes = cast(p_event.target.data, ByteArray);
+		atf_bytes.endian = Endian.LITTLE_ENDIAN;
+		atf_bytes.position = 0;
+		
+		initPam();
+	}
+	
+	private function initPam():Void
+	{
+		if (pam_bytes == null || atf_bytes == null) 
+		{
+			return;
+		}
+		var xml:GXmlAsset = cast assetManager.getAssetById("atlas_xml");
 		var callback:AnimCallback = new AnimCallback();
-		var textureAltas:GTextureAtlas = GTextureAtlasFactory.createFromAssets("atlas", cast assetManager.getAssetById("atlas_gfx"), cast assetManager.getAssetById("atlas_xml"));
+		//var textureAltas:GTextureAtlas = GTextureAtlasFactory.createFromAssets("atlas", cast assetManager.getAssetById("atlas_gfx"), cast assetManager.getAssetById("atlas_xml"));
+		var textureAltas:GTextureAtlas = GTextureAtlasFactory.createFromATFAndXml("atlas", atf_bytes, xml.xml);
 		var joint:JointAnimate = new JointAnimate();
-		joint.LoadPam(g2d_bytes, textureAltas);
+		joint.LoadPam(pam_bytes, textureAltas);
 		//var anim:JAnim = new JAnim(null, joint, 0);
 		anim = cast GNodeFactory.createNodeWithComponent(JAnim);
 		//anim = new JAnim();
 		anim.setJointAnim(joint, 0, callback);
 		anim.interpolate = false;
 		//anim.Play("MOVE_F");
-		anim.Play("VS");
+		//anim.Play("VS");
+		anim.Play("FX_F");
 		//anim.Play("ZC_HG");
 		//anim.Play("CLOUD");
 		anim.mirror = true;

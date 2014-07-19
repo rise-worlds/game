@@ -8,6 +8,7 @@ package com.genome2d.components.renderables.jointanim
 	import com.genome2d.components.GComponent;
     import __AS3__.vec.Vector;
 	import com.genome2d.components.renderables.jointanim.JAMemoryImage;
+	import com.genome2d.context.GBlendMode;
     import flash.geom.Rectangle;
     import flash.geom.Matrix3D;
     import flash.geom.Matrix;
@@ -626,7 +627,7 @@ package com.genome2d.components.renderables.jointanim
                                 //p_context.draw2(_local21.texture, _helpDrawSprite, (_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? 2 : 1));
                                 p_context.drawMatrix(_local21.texture, 
 									_helpDrawSprite.a, _helpDrawSprite.b, _helpDrawSprite.c, _helpDrawSprite.d, _helpDrawSprite.tx, _helpDrawSprite.ty,
-									(_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? 2 : 1));
+									(_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? GBlendMode.MULTIPLY : GBlendMode.NORMAL));
 								//node.core.getContext().draw(_local21.texture, node.transform.g2d_worldX, node.transform.g2d_worldY, node.transform.g2d_worldScaleX, node.transform.g2d_worldScaleY, node.transform.g2d_worldRotation, node.transform.g2d_worldRed, node.transform.g2d_worldGreen, node.transform.g2d_worldBlue, node.transform.g2d_worldAlpha, 0, null);
                             }
                             else

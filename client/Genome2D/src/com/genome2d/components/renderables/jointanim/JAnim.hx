@@ -1,5 +1,6 @@
 package com.genome2d.components.renderables.jointanim;
 
+import com.genome2d.context.GBlendMode;
 import com.genome2d.context.GContextCamera;
 import com.genome2d.context.IContext;
 import com.genome2d.error.GError;
@@ -659,12 +660,12 @@ class JAnim extends GComponent implements IRenderable {
 								_helpDrawSprite.c,
 								_helpDrawSprite.d,
 								_helpDrawSprite.tx,
-								_helpDrawSprite.ty/*,
+								_helpDrawSprite.ty,
 								(aNewColor.red * 0.003921568627451),
 								(aNewColor.green * 0.003921568627451),
 								(aNewColor.blue * 0.003921568627451),
 								(aNewColor.alpha * 0.003921568627451),
-								((((additive) || (anObjectPos.isAdditive))) ? 2 : 1)*/);
+								((((additive) || (anObjectPos.isAdditive))) ? GBlendMode.ADD : GBlendMode.NORMAL));
 						}
 						else 
 						{
@@ -675,7 +676,7 @@ class JAnim extends GComponent implements IRenderable {
 									(aNewColor.green * 0.003921568627451),
 									(aNewColor.blue * 0.003921568627451),
 									(aNewColor.alpha * 0.003921568627451),
-									((((additive) || (anObjectPos.isAdditive))) ? 2 : 1));
+									((((additive) || (anObjectPos.isAdditive))) ? GBlendMode.ADD : GBlendMode.NORMAL));
 							}
 						}
 						if (_local18 != 3) break;

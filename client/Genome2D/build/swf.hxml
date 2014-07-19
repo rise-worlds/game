@@ -15,5 +15,6 @@
 
 # Flash Swc flags
 -swf-version 12
---macro include('com')
--swf bin/Genome2Dhx.swc
+#--macro include('com')
+-main Main
+-swf bin/Genome2Dhx.swf
