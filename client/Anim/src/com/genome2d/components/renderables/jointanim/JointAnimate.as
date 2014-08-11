@@ -553,7 +553,8 @@ package com.genome2d.components.renderables.jointanim
                         };
                         _local25.isSprite = !(((_local21 & 0x8000) == 0));
                         _local25.isAdditive = !(((_local21 & 0x4000) == 0));
-                        _local25.resNum = steam.readByte();
+                        //_local25.resNum = steam.readByte();
+                        _local25.resNum = steam.readUnsignedByte();
                         _local25.hasSrcRect = false;
                         _local25.color = JAColor.White;
                         _local25.animFrameNum = 0;

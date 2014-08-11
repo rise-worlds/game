@@ -624,17 +624,17 @@ package com.genome2d.components.renderables.jointanim
                             if (_local21.imageExist)
                             {
 								// TODO:
-                                //p_context.draw2(_local21.texture, _helpDrawSprite, (_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? 2 : 1));
+                                //p_context.draw2(_local21.texture, _helpDrawSprite, (_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? GBlendMode.ADD : GBlendMode.NORMAL));
                                 p_context.drawMatrix(_local21.texture, 
 									_helpDrawSprite.a, _helpDrawSprite.b, _helpDrawSprite.c, _helpDrawSprite.d, _helpDrawSprite.tx, _helpDrawSprite.ty,
-									(_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? GBlendMode.MULTIPLY : GBlendMode.NORMAL));
+									(_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? GBlendMode.ADD : GBlendMode.NORMAL));
 								//node.core.getContext().draw(_local21.texture, node.transform.g2d_worldX, node.transform.g2d_worldY, node.transform.g2d_worldScaleX, node.transform.g2d_worldScaleY, node.transform.g2d_worldRotation, node.transform.g2d_worldRed, node.transform.g2d_worldGreen, node.transform.g2d_worldBlue, node.transform.g2d_worldAlpha, 0, null);
                             }
                             else
                             {
                                 if (_listener != null)
                                 {
-                                    _listener.JAnimImageNotExistDraw(_local21.name, p_context, _helpDrawSprite, (_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? 2 : 1));
+                                    _listener.JAnimImageNotExistDraw(_local21.name, p_context, _helpDrawSprite, (_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? GBlendMode.ADD : GBlendMode.NORMAL));
                                 };
                             };
                             if (_local18 != 3) break;
