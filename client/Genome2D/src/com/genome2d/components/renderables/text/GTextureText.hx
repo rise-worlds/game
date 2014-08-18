@@ -8,9 +8,11 @@
  */
 package com.genome2d.components.renderables.text;
 
+import com.genome2d.utils.GVAlignType;
+import com.genome2d.utils.GHAlignType;
 import com.genome2d.error.GError;
 import com.genome2d.textures.GCharTexture;
-import com.genome2d.textures.GFontTextureAtlas;
+import com.genome2d.textures.GTextureFontAtlas;
 import com.genome2d.geom.GRectangle;
 import com.genome2d.signals.GMouseSignalType;
 import com.genome2d.node.GNode;
@@ -38,7 +40,7 @@ class GTextureText extends GComponent implements IRenderable
      *  Default 0
      */
     #if swc @:extern #end
-	public var tracking(get, set):Float;
+	@prototype public var tracking(get, set):Float;
     #if swc @:getter(tracking) #end
 	inline private function get_tracking():Float {
 		return g2d_tracking;
@@ -56,7 +58,7 @@ class GTextureText extends GComponent implements IRenderable
      *  Default 0
      */
     #if swc @:extern #end
-	public var lineSpace(get, set):Float;
+	@prototype public var lineSpace(get, set):Float;
     #if swc @:getter(lineSpace) #end
 	inline private function get_lineSpace():Float {
 		return g2d_lineSpace;
@@ -70,7 +72,7 @@ class GTextureText extends GComponent implements IRenderable
 	
 	private var g2d_vAlign:Int = 0;
     #if swc @:extern #end
-	public var vAlign(get,set):Int;
+	@prototype public var vAlign(get,set):Int;
     #if swc @:getter(vAlign) #end
 	inline private function get_vAlign():Int {
 		return g2d_vAlign;
@@ -84,7 +86,7 @@ class GTextureText extends GComponent implements IRenderable
 
     private var g2d_hAlign:Int = 0;
     #if swc @:extern #end
-    public var hAlign(get,set):Int;
+    @prototype public var hAlign(get,set):Int;
     #if swc @:getter(hAlign) #end
     inline private function get_hAlign():Int {
         return g2d_hAlign;
@@ -96,12 +98,12 @@ class GTextureText extends GComponent implements IRenderable
         return g2d_hAlign;
     }
 
-    private var g2d_textureAtlas:GFontTextureAtlas;
+    private var g2d_textureAtlas:GTextureFontAtlas;
     /*
      *  Texture atlas id used for character textures lookup
      */
     #if swc @:extern #end
-	public var textureAtlasId(get, set):String;
+	@prototype public var textureAtlasId(get, set):String;
     #if swc @:getter(textureAtlasId) #end
 	inline private function get_textureAtlasId():String {
 		if (g2d_textureAtlas != null) return g2d_textureAtlas.getId();
@@ -109,14 +111,14 @@ class GTextureText extends GComponent implements IRenderable
 	}
     #if swc @:setter(textureAtlasId) #end
 	inline private function set_textureAtlasId(p_value:String):String {
-		setTextureAtlas(GTextureAtlas.getFontTextureAtlasById(p_value));
+		setTextureAtlas(GTextureFontAtlas.getTextureFontAtlasById(p_value));
 		return p_value;
 	}
 
     /*
      *  Set texture atlas that will be used for character textures lookup
      */
-	public function setTextureAtlas(p_textureAtlas:GFontTextureAtlas):Void {
+	public function setTextureAtlas(p_textureAtlas:GTextureFontAtlas):Void {
 		g2d_textureAtlas = p_textureAtlas;
 		g2d_invalidate = true;
 	}
@@ -126,7 +128,7 @@ class GTextureText extends GComponent implements IRenderable
      *  Text
      */
     #if swc @:extern #end
-	public var text(get, set):String;
+	@prototype public var text(get, set):String;
     #if swc @:getter(text) #end
 	inline private function get_text():String {
 		return g2d_text;
@@ -143,7 +145,7 @@ class GTextureText extends GComponent implements IRenderable
         Text should automatically resize width/height
      */
     #if swc @:extern #end
-    public var autoSize(get, set):Bool;
+    @prototype public var autoSize(get, set):Bool;
     #if swc @:getter(autoSize) #end
     inline private function get_autoSize():Bool {
         return g2d_autoSize;
@@ -160,7 +162,7 @@ class GTextureText extends GComponent implements IRenderable
         Width of the text
      */
     #if swc @:extern #end
-	public var width(get, set):Float;
+	@prototype public var width(get, set):Float;
     #if swc @:getter(width) #end
 	inline private function get_width():Float {
 		if (g2d_autoSize && g2d_invalidate) invalidateText();
@@ -179,7 +181,7 @@ class GTextureText extends GComponent implements IRenderable
         Height of the text
      */
     #if swc @:extern #end
-	public var height(get, set):Float;
+	@prototype public var height(get, set):Float;
     #if swc @:getter(height) #end
 	public function get_height():Float {		
 		if (g2d_autoSize && g2d_invalidate) invalidateText();
@@ -318,9 +320,9 @@ class GTextureText extends GComponent implements IRenderable
 
         var bottom:Float = offsetY + g2d_textureAtlas.lineHeight;
         var offsetY:Float = 0;
-        if (g2d_vAlign == GTextureTextVAlignType.MIDDLE) {
+        if (g2d_vAlign == GVAlignType.MIDDLE) {
             offsetY = (g2d_height - bottom) * .5;
-        } else if (g2d_vAlign == GTextureTextVAlignType.BOTTOM) {
+        } else if (g2d_vAlign == GVAlignType.BOTTOM) {
             offsetY = g2d_height - bottom;
         }
 
@@ -333,9 +335,9 @@ class GTextureText extends GComponent implements IRenderable
             var last:GChar = currentLine[charCount-1];
             var right:Float = last.g2d_x - last.g2d_texture.xoffset + last.g2d_texture.xadvance;
 
-            if (g2d_hAlign == GTextureTextHAlignType.CENTER) {
+            if (g2d_hAlign == GHAlignType.CENTER) {
                 offsetX = (g2d_width - right) * .5;
-            } else if (g2d_hAlign == GTextureTextHAlignType.RIGHT) {
+            } else if (g2d_hAlign == GHAlignType.RIGHT) {
                 offsetX = g2d_width - right;
             }
 

@@ -12,7 +12,7 @@ import com.genome2d.context.stage3d.GStage3DContext;
 import flash.display3D.textures.TextureBase;
 import flash.utils.Dictionary;
 import com.genome2d.context.filters.GFilter;
-import com.adobe.utils.AGALMiniAssembler;
+import com.adobe.utils.extended.AGALMiniAssembler;
 import com.genome2d.textures.GContextTexture;
 import flash.display3D.Context3D;
 import flash.display3D.Context3DProgramType;
@@ -50,6 +50,7 @@ class GTriangleTextureBufferCPURenderer implements IGRenderer
     private var g2d_activeFilter:GFilter;
     private var g2d_activeFiltering:Int;
     private var g2d_activeTexture:TextureBase;
+    private var g2d_activeRepeat:Bool = false;
 
     private var g2d_useSeparatedAlphaPipeline:Bool = true;
 
@@ -123,8 +124,9 @@ class GTriangleTextureBufferCPURenderer implements IGRenderer
         var notSameAlpha:Bool = g2d_activeAlpha != useAlpha;
         var notSameAtf:Bool = g2d_activeAtf != p_texture.atfType;
         var notSameFilter:Bool = g2d_activeFilter != p_filter;
+        var notSameRepeat:Bool = g2d_activeRepeat != p_texture.g2d_repeatable;
 
-        if (notSameTexture || notSameFiltering || notSameAlpha || notSameAtf) {
+        if (notSameRepeat || notSameTexture || notSameFiltering || notSameAlpha || notSameAtf) {
             if (g2d_activeTexture != null) push();
 
             if (notSameTexture) {
@@ -132,13 +134,14 @@ class GTriangleTextureBufferCPURenderer implements IGRenderer
                 g2d_nativeContext.setTextureAt(0, g2d_activeTexture);
             }
 
-            if (notSameFiltering || notSameAlpha || notSameAtf) {
+            if (notSameRepeat || notSameFiltering || notSameAlpha || notSameAtf) {
                 g2d_activeFiltering = p_texture.g2d_filteringType;
                 g2d_activeAlpha = useAlpha;
                 g2d_activeAtf = p_texture.atfType;
                 if (g2d_activeFilter != null) g2d_activeFilter.clear(g2d_context);
                 g2d_activeFilter = p_filter;
                 if (g2d_activeFilter != null) g2d_activeFilter.bind(g2d_context, p_texture);
+                g2d_activeRepeat = p_texture.g2d_repeatable;
                 g2d_nativeContext.setProgram(getCachedProgram("true", g2d_activeFiltering, g2d_activeAlpha, g2d_activeAtf, g2d_activeFilter));
             }
         }

@@ -114,6 +114,8 @@ class GContextTexture
 
     public var pivotX:Float = 0;
     public var pivotY:Float = 0;
+	public var frameX:Float = 0;
+	public var frameY:Float = 0;
 	public var frameWidth:Float = 0;
 	public var frameHeight:Float = 0;
 

@@ -8,6 +8,7 @@
  */
 package com.genome2d.context.stage3d;
 
+import com.genome2d.context.stats.GStats;
 import msignal.Signal.Signal0;
 import msignal.Signal.Signal1;
 import msignal.Signal.Signal2;
@@ -399,7 +400,9 @@ class GStage3DContext implements IContext
     /**
 	  	Set camera that should be used for all subsequent draws
 	 */
-    public function setCamera(p_camera:GContextCamera):Void {
+    public function setCamera(p_camera:GContextCamera, p_forceInvalidate:Bool = false):Void {
+        if (g2d_activeCamera == p_camera && !p_forceInvalidate) return;
+
         g2d_activeCamera = p_camera;
 
         g2d_activeViewRect.setTo(untyped __int__(g2d_stageViewRect.width*g2d_activeCamera.normalizedViewX),
@@ -416,9 +419,9 @@ class GStage3DContext implements IContext
         p_camera.matrix.prependTranslation(vx, vy, 0);
         p_camera.matrix.prependRotation(g2d_activeCamera.rotation*180/Math.PI, Vector3D.Z_AXIS, NORMALIZED_VECTOR);
         p_camera.matrix.prependScale(g2d_activeCamera.scaleX, g2d_activeCamera.scaleY, 1);
-        p_camera.matrix.prependTranslation( -g2d_activeCamera.x, -g2d_activeCamera.y, 0);
+        p_camera.matrix.prependTranslation(-g2d_activeCamera.x, -g2d_activeCamera.y, 0);
 
-        g2d_nativeContext.setScissorRectangle(g2d_activeViewRect);
+        if (!g2d_activeViewRect.equals(g2d_stageViewRect)) g2d_nativeContext.setScissorRectangle(g2d_activeViewRect);
         g2d_nativeContext.setProgramConstantsFromMatrix(Context3DProgramType.VERTEX, 0, g2d_activeCamera.matrix, true);
     }
 
@@ -654,11 +657,12 @@ class GStage3DContext implements IContext
 			g2d_nativeContext.setRenderToBackBuffer();
 
             // Reset camera
-            setCamera(g2d_activeCamera);
+            setCamera(g2d_activeCamera, true);
 		} else {
 			g2d_nativeContext.setRenderToTexture(p_texture.nativeTexture, g2d_enableDepthAndStencil, g2d_antiAliasing, 0);
+            g2d_nativeContext.setScissorRectangle(null);
 			g2d_nativeContext.clear(0,0,0,0);
-			
+
 			g2d_nativeContext.setProgramConstantsFromMatrix(Context3DProgramType.VERTEX, 0, GProjectionMatrix.getOrtho(p_texture.width, p_texture.height, p_transform), true);
 		}
 		
@@ -672,6 +676,7 @@ class GStage3DContext implements IContext
             g2d_nativeContext.setRenderToTexture(p_textures[i].nativeTexture, g2d_enableDepthAndStencil, g2d_antiAliasing, 0, i);
         }
 
+        g2d_nativeContext.setScissorRectangle(null);
         g2d_nativeContext.clear(0,0,0,0,0);
         g2d_nativeContext.setProgramConstantsFromMatrix(Context3DProgramType.VERTEX, 0, GProjectionMatrix.getOrtho(p_textures[0].width, p_textures[0].height, p_transform), true);
 
@@ -691,7 +696,11 @@ class GStage3DContext implements IContext
 
         var mx:Float = event.stageX-g2d_stageViewRect.x;
         var my:Float = event.stageY-g2d_stageViewRect.y;
-        var signal:GMouseSignal = new GMouseSignal(GMouseSignalType.fromNative(event.type), mx, my, captured);// event.buttonDown, event.ctrlKey,
+        var signal:GMouseSignal = new GMouseSignal(GMouseSignalType.fromNative(event.type), mx, my, captured);
+        signal.buttonDown = event.buttonDown;
+        signal.ctrlKey = event.ctrlKey;
+        signal.altKey = event.altKey;
+        signal.shiftKey = event.shiftKey;
         g2d_onMouseSignal.dispatch(signal);
     }
 

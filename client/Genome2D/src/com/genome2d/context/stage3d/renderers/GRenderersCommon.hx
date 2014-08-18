@@ -9,7 +9,7 @@
 package com.genome2d.context.stage3d.renderers;
 
 import com.genome2d.context.filters.GFilter;
-import com.adobe.utils.AGALMiniAssembler;
+import com.adobe.utils.extended.AGALMiniAssembler;
 import flash.utils.ByteArray;
 import flash.Vector;
 
@@ -63,6 +63,7 @@ class GRenderersCommon
         AGAL_VERSION = p_agalVersion;
 
         DEFAULT_CONSTANTS = Vector.ofArray([0, 0.5, 1, 2]);
+
         NORMALIZED_VERTICES = Vector.ofArray([-.5, .5,
                                               -.5,-.5,
                                                .5,-.5,

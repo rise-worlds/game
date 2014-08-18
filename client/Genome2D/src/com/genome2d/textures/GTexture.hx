@@ -49,14 +49,14 @@ class GTexture extends GContextTexture
 		super(p_context, p_id, p_sourceType, p_source, p_region, p_format, p_repeatable, p_pivotX, p_pivotY);
 		
 		g2d_parentAtlas = p_parentAtlas;
-		
+
         g2d_type = (g2d_parentAtlas == null) ? GTextureType.STANDALONE : GTextureType.SUBTEXTURE;
 		
 		g2d_invalidateUV();
 		
 		pivotX = p_pivotX;
 		pivotY = p_pivotY;
-		
+				
 		invalidateNativeTexture(false);
 	}
 

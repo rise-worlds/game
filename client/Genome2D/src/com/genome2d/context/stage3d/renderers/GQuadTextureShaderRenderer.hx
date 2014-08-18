@@ -13,7 +13,7 @@ import com.genome2d.textures.GTextureFilteringType;
 import com.genome2d.textures.GContextTexture;
 import com.genome2d.context.stats.GStats;
 import com.genome2d.context.filters.GFilter;
-import com.adobe.utils.AGALMiniAssembler;
+import com.adobe.utils.extended.AGALMiniAssembler;
 import flash.Memory;
 import flash.Vector;
 import flash.display3D.Context3D;
@@ -22,7 +22,6 @@ import flash.display3D.Context3DVertexBufferFormat;
 import flash.display3D.IndexBuffer3D;
 import flash.display3D.Program3D;
 import flash.display3D.VertexBuffer3D;
-import flash.display3D.textures.Texture;
 import flash.utils.ByteArray;
 import flash.utils.Dictionary;
 import flash.utils.Endian;
@@ -40,17 +39,16 @@ class GQuadTextureShaderRenderer implements IGRenderer
 	
 	inline static private var VERTEX_SHADER_CODE:String =
 			"mov vt0, va0						\n" +
-				
+
 			"mov vt1.x, vc[va2.x].w				\n" +
 			"add vt1.x, vt1.x, vc4.z			\n" +
 			"mov vt1, vc[vt1.x]					\n" +
 
 			"mul vt5, va0.xy, vt1.xy			\n" +
 
-			// Pivot
 			"sub vt5, vt5.xy, vt1.zw			\n" +
-			"mov vt4.x, vc[va2.x].z				\n" +
 
+			"mov vt4.x, vc[va2.x].z				\n" +
 			"sin vt1.x, vt4.x					\n" +
 			"cos vt1.y, vt4.x					\n" +
 				
@@ -91,6 +89,7 @@ class GQuadTextureShaderRenderer implements IGRenderer
 	private var g2d_quadCount:Int = 0;
 	private var g2d_activeNativeTexture:TextureBase;
 	private var g2d_activeFiltering:Int;
+    private var g2d_activeRepeat:Bool = false;
 	private var g2d_activeAlpha:Bool = false;
 	private var g2d_activeAtf:String = "";
 	private var g2d_activeFilter:GFilter;
@@ -186,7 +185,7 @@ class GQuadTextureShaderRenderer implements IGRenderer
             var arrayAlpha:Array<Float> = [index, index + 1, index, index + 1, index, index + 1, index, index + 1];
             registerIndicesAlpha = registerIndicesAlpha.concat(Vector.ofArray(arrayAlpha));
 		}
-		
+
 		g2d_geometryBuffer = g2d_nativeContext.createVertexBuffer(4*BATCH_SIZE, 2);
 		g2d_geometryBuffer.uploadFromVector(vertices, 0, 4*BATCH_SIZE);
 		
@@ -236,12 +235,13 @@ class GQuadTextureShaderRenderer implements IGRenderer
 	inline public function draw(p_x:Float, p_y:Float, p_scaleX:Float, p_scaleY:Float, p_rotation:Float, p_red:Float, p_green:Float, p_blue:Float, p_alpha:Float, p_texture:GContextTexture, p_filter:GFilter, p_overrideSource:Bool, p_sourceX:Float, p_sourceY:Float, p_sourceWidth:Float, p_sourceHeight:Float):Void {
 		var notSameTexture:Bool = g2d_activeNativeTexture != p_texture.nativeTexture;
 		var notSameFiltering:Bool = g2d_activeFiltering != p_texture.getFilteringType();
+        var notSameRepeat:Bool = g2d_activeRepeat != p_texture.g2d_repeatable;
 		var useAlpha:Bool = !g2d_useSeparatedAlphaPipeline || !(p_red == 1 && p_green == 1 && p_blue == 1 && p_alpha == 1);
 		var notSameUseAlpha:Bool = g2d_activeAlpha != useAlpha;
 		var notSameAtf:Bool = g2d_activeAtf != p_texture.atfType;
 		var notSameFilter:Bool = g2d_activeFilter != p_filter;
 
-		if (notSameTexture || notSameFiltering || notSameUseAlpha || notSameAtf || notSameFilter) {
+		if (notSameRepeat || notSameTexture || notSameFiltering || notSameUseAlpha || notSameAtf || notSameFilter) {
             // If any state changed we need to push remaining stuff to backbuffer
 			if (g2d_activeNativeTexture != null) push();
 			// Texture has changed
@@ -250,7 +250,7 @@ class GQuadTextureShaderRenderer implements IGRenderer
 				g2d_nativeContext.setTextureAt(0, p_texture.nativeTexture);
 			}
 			// Any flag affecting shader has changed
-			if (notSameFiltering || notSameUseAlpha || notSameAtf || notSameFilter) {
+			if (notSameRepeat || notSameFiltering || notSameUseAlpha || notSameAtf || notSameFilter) {
                 // Set filtering
 				g2d_activeFiltering = p_texture.getFilteringType();
                 // Set alpha usage
@@ -266,6 +266,7 @@ class GQuadTextureShaderRenderer implements IGRenderer
 				if (g2d_activeFilter != null) g2d_activeFilter.clear(g2d_context);
 				g2d_activeFilter = p_filter;
 				if (g2d_activeFilter != null) g2d_activeFilter.bind(g2d_context, p_texture);
+                g2d_activeRepeat = p_texture.g2d_repeatable;
 				g2d_nativeContext.setProgram(getCachedProgram(g2d_activeAlpha, p_texture.g2d_repeatable, g2d_activeFiltering, g2d_activeAtf, g2d_activeFilter));
 			}
 		}

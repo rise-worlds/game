@@ -115,10 +115,11 @@ class Main
 		pam_bytes.endian = Endian.LITTLE_ENDIAN;
 		pam_bytes.position = 0;
 		
-		var urlLoader:URLLoader = new URLLoader();
-		urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
-		urlLoader.addEventListener(Event.COMPLETE, atf_completeHandler);
-		urlLoader.load(new URLRequest("fx19_fx01.atf"));
+		//var urlLoader:URLLoader = new URLLoader();
+		//urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
+		//urlLoader.addEventListener(Event.COMPLETE, atf_completeHandler);
+		//urlLoader.load(new URLRequest("fx19_fx01.atf"));
+		initPam();
 	}
 	
 	
@@ -134,14 +135,14 @@ class Main
 	
 	private function initPam():Void
 	{
-		if (pam_bytes == null || atf_bytes == null) 
-		{
-			return;
-		}
+		//if (pam_bytes == null || atf_bytes == null) 
+		//{
+		//	return;
+		//}
 		var xml:GXmlAsset = cast assetManager.getAssetById("atlas_xml");
 		var callback:AnimCallback = new AnimCallback();
-		//var textureAltas:GTextureAtlas = GTextureAtlasFactory.createFromAssets("atlas", cast assetManager.getAssetById("atlas_gfx"), cast assetManager.getAssetById("atlas_xml"));
-		var textureAltas:GTextureAtlas = GTextureAtlasFactory.createFromATFAndXml("atlas", atf_bytes, xml.xml);
+		var textureAltas:GTextureAtlas = GTextureAtlasFactory.createFromAssets("atlas", cast assetManager.getAssetById("atlas_gfx"), cast assetManager.getAssetById("atlas_xml"));
+		//var textureAltas:GTextureAtlas = GTextureAtlasFactory.createFromATFAndXml("atlas", atf_bytes, xml.xml);
 		var joint:JointAnimate = new JointAnimate();
 		joint.LoadPam(pam_bytes, textureAltas);
 		//var anim:JAnim = new JAnim(null, joint, 0);

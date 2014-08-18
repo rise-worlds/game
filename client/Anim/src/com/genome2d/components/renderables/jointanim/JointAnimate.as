@@ -16,8 +16,8 @@ package com.genome2d.components.renderables.jointanim
     import com.genome2d.textures.GTexture;
     import flash.utils.Dictionary;
     import flash.geom.*;
-    import com.adobe.utils.*;
-    import flash.utils.*;
+    //import com.adobe.utils.*;
+    //import flash.utils.*;
 
     public class JointAnimate 
     {

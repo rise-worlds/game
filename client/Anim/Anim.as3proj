@@ -8,8 +8,8 @@
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="12" />
-    <movie minorVersion="0" />
+    <movie version="11" />
+    <movie minorVersion="6" />
     <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
   </output>
@@ -52,7 +52,7 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="lib\Genome2D_1_0_263.swc" />
+    <element path="lib\Genome2D_1_0_274.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
@@ -81,7 +81,7 @@
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="True">"$(CompilerPath)\bin\compc.exe" -include-sources "$(ProjectDir)\src" -compiler.include-libraries "$(ProjectDir)\lib\Genome2D_1_0_263.swc" -output "$(OutputFile)"</postBuildCommand>
+  <postBuildCommand alwaysRun="True">"$(CompilerPath)\bin\compc.exe" -include-sources "$(ProjectDir)\src" -compiler.include-libraries "$(ProjectDir)\lib\Genome2D_1_0_274.swc" -output "$(OutputFile)"</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
