@@ -597,11 +597,11 @@ package com.genome2d.components.renderables.jointanim
                             _helpTransform.matrix.LoadIdentity();
                             _helpTransform.matrix.m02 = (_local23.width / 2);
                             _helpTransform.matrix.m12 = (_local23.height / 2);
-							if (_local21.imageExist)
-							{
-								_helpTransform.matrix.m02 -= _local21.texture.pivotX;
-								_helpTransform.matrix.m12 -= _local21.texture.pivotY;
-							}
+							//if (_local21.imageExist)
+							//{
+							//	_helpTransform.matrix.m02 -= _local21.texture.pivotX;
+							//	_helpTransform.matrix.m12 -= _local21.texture.pivotY;
+							//}
                             //_helpTransform.matrix.m02 = -_local21.texture.frameWidth * 0.5 -_local21.texture.pivotX;
                             //_helpTransform.matrix.m12 = -_local21.texture.frameHeight * 0.5-_local21.texture.pivotY;
                             if (_mirror)
