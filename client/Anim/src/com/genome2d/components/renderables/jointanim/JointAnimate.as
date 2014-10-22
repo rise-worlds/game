@@ -526,7 +526,7 @@ package com.genome2d.components.renderables.jointanim
                         _local19++;
                     };
                 };
-                if ((_local4 & 2))
+                if ((_local4 & FRAMEFLAGS_HAS_ADDS))
                 {
                     _local12 = steam.readByte();
                     if (_local12 == 0xFF)
@@ -589,7 +589,7 @@ package com.genome2d.components.renderables.jointanim
                         _local19++;
                     };
                 };
-                if ((_local4 & 4))
+                if ((_local4 & FRAMEFLAGS_HAS_MOVES))
                 {
                     _local13 = steam.readByte();
                     if (_local13 == 0xFF)
@@ -741,6 +741,6 @@ package com.genome2d.components.renderables.jointanim
 		private const MOVEFLAGS_HAS_ANIMFRAMENUM:uint = 0x0400;
 
     }
-}//package com.flengine.components.renderables.jointanim
+}
 
 

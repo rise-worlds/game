@@ -645,7 +645,7 @@
 							{
 								// TODO:
 								//p_context.draw2(_local21.texture, _helpDrawSprite, (_local8.red * 0.003921568627451), (_local8.green * 0.003921568627451), (_local8.blue * 0.003921568627451), (_local8.alpha * 0.003921568627451), ((((additive) || (_local20.isAdditive))) ? GBlendMode.ADD : GBlendMode.NORMAL));
-								p_context.drawMatrix(aDrawImage.texture, _helpDrawSprite.a, _helpDrawSprite.b, _helpDrawSprite.c, _helpDrawSprite.d, _helpDrawSprite.tx, _helpDrawSprite.ty, (aNewColor.red * 0.003921568627451), (aNewColor.green * 0.003921568627451), (aNewColor.blue * 0.003921568627451), (aNewColor.alpha * 0.003921568627451), ((((additive) || (anObjectPos.isAdditive))) ? GBlendMode.ADD : GBlendMode.NORMAL));
+								p_context.drawMatrix(aDrawImage.texture, _helpDrawSprite.a, _helpDrawSprite.b, _helpDrawSprite.c, _helpDrawSprite.d, _helpDrawSprite.tx, _helpDrawSprite.ty, (aNewColor.red * 0.003921568627451), (aNewColor.green * 0.003921568627451), (aNewColor.blue * 0.003921568627451), (aNewColor.alpha * 0.003921568627451), ((additive || anObjectPos.isAdditive) ? GBlendMode.ADD : GBlendMode.NORMAL));
 								//node.core.getContext().draw(_local21.texture, node.transform.g2d_worldX, node.transform.g2d_worldY, node.transform.g2d_worldScaleX, node.transform.g2d_worldScaleY, node.transform.g2d_worldRotation, node.transform.g2d_worldRed, node.transform.g2d_worldGreen, node.transform.g2d_worldBlue, node.transform.g2d_worldAlpha, 0, null);
 							}
 							else
@@ -710,17 +710,18 @@
 			var aCurFrame:JAFrame = theSpriteInst.spriteDef.frames[index];
 			if (theSpriteInst.onNewFrame)
 			{
-				if (theSpriteInst.lastFrameNum < theSpriteInst.frameNum)
-				{
-					var _local6:int = theSpriteInst.frameNum;
-					var _local10:int = (theSpriteInst.lastFrameNum + 1);
-					while (_local10 < _local6)
-					{
-						var _local7:JAFrame = theSpriteInst.spriteDef.frames[_local10];
-						FrameHit(theSpriteInst, _local7, theObjectPos);
-						_local10++;
-					}
-				}
+//				TODO: 在有些状态下_local10会大于theSpriteInst.spriteDef.frames.length
+//				if (theSpriteInst.lastFrameNum < theSpriteInst.frameNum)
+//				{
+//					var _local6:int = theSpriteInst.frameNum;
+//					var _local10:int = (theSpriteInst.lastFrameNum + 1);
+//					while (_local10 < _local6)
+//					{
+//						var _local7:JAFrame = theSpriteInst.spriteDef.frames[_local10];
+//						FrameHit(theSpriteInst, _local7, theObjectPos);
+//						_local10++;
+//					}
+//				}
 				
 				FrameHit(theSpriteInst, aCurFrame, theObjectPos);
 			}
