@@ -99,17 +99,16 @@
 		
 		public static function HelpCallInitialize():void
 		{
-			var _local1:int;
 			if (!bInit)
 			{
 				_helpCallTransform.fixed = true;
 				_helpCallColor.fixed = true;
-				_local1 = 0;
-				while (_local1 < 1000)
+				var i:int = 0;
+				while (i < 1000)
 				{
-					_helpCallTransform[_local1] = new JATransform();
-					_helpCallColor[_local1] = new JAColor();
-					_local1++;
+					_helpCallTransform[i] = new JATransform();
+					_helpCallColor[i] = new JAColor();
+					i++;
 				}
 				
 				bInit = true;
@@ -1055,7 +1054,7 @@
 			{
 				_local14 = (theSpriteInst.spriteDef.workAreaDuration - 1);
 			}
-			;
+			
 			var _local15:JATransform = _helpCallTransform[_helpCallDepth];
 			var _local4:JAColor = _helpCallColor[_helpCallDepth];
 			_helpCallDepth++;
@@ -1073,12 +1072,12 @@
 					{
 						_local19 = theSpriteInst.spriteDef.frames[((theSpriteInst.frameNum + (((_local10) == 0) ? _local14 : (((_local10) == 1) ? _local16 : _local13))) % theSpriteInst.spriteDef.frames.length)];
 					}
-					;
+					
 					if (_local11.hasStop)
 					{
 						_local19 = _local11;
 					}
-					;
+					
 					if (_local19.frameObjectPosVector.length > theObjectPosIdx)
 					{
 						_helpANextObjectPos[_local10] = _local19.frameObjectPosVector[theObjectPosIdx];
@@ -1086,9 +1085,8 @@
 						{
 							_helpANextObjectPos[_local10] = null;
 						}
-						;
 					}
-					;
+					
 					if (_helpANextObjectPos[_local10] == null)
 					{
 						_local8 = 0;
@@ -1099,15 +1097,14 @@
 								_helpANextObjectPos[_local10] = _local19.frameObjectPosVector[_local8];
 								break;
 							}
-							;
+							
 							_local8++;
 						}
-						;
 					}
-					;
+					
 					_local10++;
 				}
-				;
+				
 				if (_helpANextObjectPos[1] != null)
 				{
 					_local9 = (theSpriteInst.frameNum - Math.floor(theSpriteInst.frameNum));
@@ -1120,14 +1117,13 @@
 					_local15.clone(_local12.transform);
 					_local4.clone(_local12.color);
 				}
-				;
 			}
 			else
 			{
 				_local15.clone(_local12.transform);
 				_local4.clone(_local12.color);
 			}
-			;
+			
 			_local15.matrix = JAMatrix3.MulJAMatrix3(_local5.transform, _local15.matrix, _local15.matrix);
 			if (((((_local5.isBlending) && (!((_blendTicksTotal == 0))))) && ((theSpriteInst == _mainSpriteInst))))
 			{
@@ -1135,7 +1131,7 @@
 				_local15 = _local5.blendSrcTransform.InterpolateTo(_local15, _local9, _local15);
 				_local4.Set((((_local5.blendSrcColor.red * (1 - _local9)) + (_local4.red * _local9)) + 0.5), (((_local5.blendSrcColor.green * (1 - _local9)) + (_local4.green * _local9)) + 0.5), (((_local5.blendSrcColor.blue * (1 - _local9)) + (_local4.blue * _local9)) + 0.5), (((_local5.blendSrcColor.alpha * (1 - _local9)) + (_local4.alpha * _local9)) + 0.5));
 			}
-			;
+			
 			_helpCalcTransform = _local15;
 			_helpCalcColor = _local4;
 			_helpANextObjectPos[0] = null;
