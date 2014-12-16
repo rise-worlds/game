@@ -135,6 +135,7 @@ namespace VersionMaker
 			int length = nodes.Length;
 			for (int i = 0; i < length; i++)
 			{
+				// <mode> SP <type> SP <object> SP <object size> TAB <file>
 				string[] attribs = Regex.Split(nodes[i], @"\s+");
 				if (attribs.Length <= 1 || attribs[1] != "blob") continue;
 				Revision r = findRev(attribs[2], getFileBasePathGIT(attribs[4], basePath));

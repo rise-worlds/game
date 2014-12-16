@@ -4,8 +4,6 @@ import com.genome2d.assets.GAssetManager;
 import com.genome2d.assets.GXmlAsset;
 import com.genome2d.components.renderables.GMovieClip;
 import com.genome2d.components.renderables.GSprite;
-import com.genome2d.components.renderables.jointanim.JAnim;
-import com.genome2d.components.renderables.jointanim.JointAnimate;
 import com.genome2d.context.filters.GHDRPassFilter;
 import com.genome2d.context.GContextConfig;
 import com.genome2d.context.stats.GStats;
@@ -15,16 +13,6 @@ import com.genome2d.signals.GNodeMouseSignal;
 import com.genome2d.textures.factories.GTextureAtlasFactory;
 import com.genome2d.textures.GTexture;
 import com.genome2d.textures.GTextureAtlas;
-import flash.display.StageAlign;
-import flash.display.StageScaleMode;
-import flash.Lib;
-import flash.net.URLRequest;
-import flash.events.IOErrorEvent;
-import flash.events.Event;
-import flash.net.URLLoaderDataFormat;
-import flash.net.URLLoader;
-import flash.utils.ByteArray;
-import flash.utils.Endian;
 
 /**
  * ...
@@ -58,8 +46,7 @@ class Main
 		var config = new GContextConfig();
         genome = Genome2D.getInstance();
         genome.onInitialized.add(genomeInitializedHandler);
-		genome.onUpdate.add(genomeUpdateHandler);
-		genome.onPostRender.add(genomeRenderHandler);
+		genome.onInvalidated.add(genomeInvalidated);
         genome.init(config);
     }
 
@@ -70,18 +57,17 @@ class Main
 		GStats.visible = true;
         initAssets();
     }
+	
+	private function genomeInvalidated()
+	{
+		if (sprite != null) sprite.texture.invalidateNativeTexture(false);
+	}
 
     /**
         Initialize assets
      **/
     private function initAssets():Void {
         assetManager = new GAssetManager();
-        //assetManager.addUrl("atlas_gfx", "building1.png");
-        //assetManager.addUrl("atlas_xml", "building1.xml");
-        //assetManager.addUrl("atlas_gfx", "cloud.png");
-        //assetManager.addUrl("atlas_xml", "cloud.xml");
-        //assetManager.addUrl("atlas_gfx", "vs.png");
-        //assetManager.addUrl("atlas_xml", "vs.xml");
         assetManager.addUrl("atlas_gfx", "fx19_fx01.png");
         assetManager.addUrl("atlas_xml", "fx19_fx01.xml");
         assetManager.onAllLoaded.add(assetsInitializedHandler);
@@ -90,79 +76,14 @@ class Main
 
 	private var clip:GMovieClip;
     private var sprite:GSprite;
-	private var anim:JAnim;
 
     /**
         Assets initialization handler dispatched after all assets were initialized
      **/
     private function assetsInitializedHandler():Void {
-		var urlLoader:URLLoader = new URLLoader();
-		urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
-		urlLoader.addEventListener(Event.COMPLETE, pam_completeHandler);
-		//urlLoader.addEventListener(IOErrorEvent.IO_ERROR, g2d_ioErrorHandler);
-		//urlLoader.load(new URLRequest("building1.pam"));
-		//urlLoader.load(new URLRequest("cloud.pam"));
-		//urlLoader.load(new URLRequest("vs.pam"));
-		urlLoader.load(new URLRequest("fx19_fx01.pam"));
-		JAnim.HelpCallInitialize();
-    }
-	
-	private var pam_bytes:ByteArray;
-	private var atf_bytes:ByteArray;
-	private function pam_completeHandler(p_event:Event):Void
-	{
-		pam_bytes = cast(p_event.target.data, ByteArray);
-		pam_bytes.endian = Endian.LITTLE_ENDIAN;
-		pam_bytes.position = 0;
-		
-		//var urlLoader:URLLoader = new URLLoader();
-		//urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
-		//urlLoader.addEventListener(Event.COMPLETE, atf_completeHandler);
-		//urlLoader.load(new URLRequest("fx19_fx01.atf"));
-		initPam();
-	}
-	
-	
-	//private function g2d_completeHandler(p_event:Event):Void
-	private function atf_completeHandler(p_event:Event):Void
-	{
-		atf_bytes = cast(p_event.target.data, ByteArray);
-		atf_bytes.endian = Endian.LITTLE_ENDIAN;
-		atf_bytes.position = 0;
-		
-		initPam();
-	}
-	
-	private function initPam():Void
-	{
-		//if (pam_bytes == null || atf_bytes == null) 
-		//{
-		//	return;
-		//}
-		var xml:GXmlAsset = cast assetManager.getAssetById("atlas_xml");
-		var callback:AnimCallback = new AnimCallback();
 		var textureAltas:GTextureAtlas = GTextureAtlasFactory.createFromAssets("atlas", cast assetManager.getAssetById("atlas_gfx"), cast assetManager.getAssetById("atlas_xml"));
-		//var textureAltas:GTextureAtlas = GTextureAtlasFactory.createFromATFAndXml("atlas", atf_bytes, xml.xml);
-		var joint:JointAnimate = new JointAnimate();
-		joint.LoadPam(pam_bytes, textureAltas);
-		//var anim:JAnim = new JAnim(null, joint, 0);
-		anim = cast GNodeFactory.createNodeWithComponent(JAnim);
-		//anim = new JAnim();
-		anim.setJointAnim(joint, 0, callback);
-		anim.interpolate = false;
-		//anim.Play("MOVE_F");
-		//anim.Play("VS");
-		anim.Play("FX_F");
-		//anim.Play("ZC_HG");
-		//anim.Play("CLOUD");
-		anim.mirror = true;
-		//anim.color = cast 0xAABBCCDDEE;
-		//anim.filter = new GHDRPassFilter();
-		anim.transform.LoadIdentity();
-		//anim.transform.Translate(100, 100);
-		genome.root.addChild(anim.node);
 		
-		//sprite = createSprite(100, 100, "atlas_GENERAL101B_MOVE_F0000");
+		sprite = createSprite(100, 100, "atlas");
 		//var clip:GMovieClip;
         //clip = createMovieClip(500, 400, ["atlas_GENERAL101B_MOVE_F0000",
 										  //"atlas_GENERAL101B_MOVE_F0001",
@@ -176,56 +97,6 @@ class Main
 										  //"atlas_GENERAL101B_MOVE_F0009"]);
 	}
 	
-	private var list:Array<String> = 
-			["atlas_GENERAL101B_MOVE_F0000",
-			 "atlas_GENERAL101B_MOVE_F0001",
-			 "atlas_GENERAL101B_MOVE_F0002",
-			 "atlas_GENERAL101B_MOVE_F0003",
-			 "atlas_GENERAL101B_MOVE_F0004",
-			 "atlas_GENERAL101B_MOVE_F0005",
-			 "atlas_GENERAL101B_MOVE_F0006",
-			 "atlas_GENERAL101B_MOVE_F0007",
-			 "atlas_GENERAL101B_MOVE_F0008",
-			 "atlas_GENERAL101B_MOVE_F0009"];
-	private var g2d_accumulatedTime:Float = 0;
-	private var g2d_currentFrame:Int = 0;
-	
-	private function genomeUpdateHandler(time:Float):Void
-	{
-		if (anim != null)
-		{
-			anim.Update(time * 0.1);
-			//anim._update(time * 0.1);
-		}
-		if (sprite != null) 
-		{
-			g2d_accumulatedTime += genome.root.core.getCurrentFrameDeltaTime();
-			if (g2d_accumulatedTime >= 100) {
-				g2d_currentFrame += Std.int(g2d_accumulatedTime / 100);
-				//if (g2d_currentFrame == list.length) 
-				//{
-				//	g2d_currentFrame = 1;
-				//}
-				//else 
-				{
-					g2d_currentFrame %= list.length;
-				}
-				//sprite.textureId = list[g2d_currentFrame];
-				g2d_accumulatedTime %= 100;
-				//Lib.trace(g2d_currentFrame);
-				//Lib.trace(list[g2d_currentFrame]);
-			}
-		}
-	}
-	
-	private function genomeRenderHandler():Void
-	{
-		if (anim != null)
-		{
-			anim.Draw(genome.getContext());
-		}
-	}
-
     /**
         Create a sprite helper function
      **/
