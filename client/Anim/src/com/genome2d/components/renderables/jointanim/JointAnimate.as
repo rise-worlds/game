@@ -8,7 +8,6 @@ package com.genome2d.components.renderables.jointanim
     import flash.geom.Rectangle;
     import __AS3__.vec.Vector;
     import flash.geom.Point;
-    import com.genome2d.rand.MTRand;
     import flash.utils.getTimer;
     import flash.utils.ByteArray;
     import com.genome2d.textures.GTextureAtlas;
@@ -16,8 +15,6 @@ package com.genome2d.components.renderables.jointanim
     import com.genome2d.textures.GTexture;
     import flash.utils.Dictionary;
     import flash.geom.*;
-    //import com.adobe.utils.*;
-    //import flash.utils.*;
 
     public class JointAnimate 
     {
@@ -40,16 +37,11 @@ package com.genome2d.components.renderables.jointanim
         private var _mainAnimDef:JAAnimDef;
         private var _remapList:Array;
         private var _particleAttachOffset:Point;
-        private var _randUsed:Boolean;
-        private var _rand:MTRand;
         private var _drawScale:Number;
         private var _imgScale:Number;
 
         public function JointAnimate()
         {
-            _randUsed = false;
-            _rand = new MTRand();
-            _rand.SRand(getTimer());
             _drawScale = 1;
             _imgScale = 1;
             _loaded = false;
@@ -534,7 +526,7 @@ package com.genome2d.components.renderables.jointanim
                         _local19++;
                     };
                 };
-                if ((_local4 & 2))
+                if ((_local4 & FRAMEFLAGS_HAS_ADDS))
                 {
                     _local12 = steam.readByte();
                     if (_local12 == 0xFF)
@@ -597,7 +589,7 @@ package com.genome2d.components.renderables.jointanim
                         _local19++;
                     };
                 };
-                if ((_local4 & 4))
+                if ((_local4 & FRAMEFLAGS_HAS_MOVES))
                 {
                     _local13 = steam.readByte();
                     if (_local13 == 0xFF)
@@ -749,6 +741,6 @@ package com.genome2d.components.renderables.jointanim
 		private const MOVEFLAGS_HAS_ANIMFRAMENUM:uint = 0x0400;
 
     }
-}//package com.flengine.components.renderables.jointanim
+}
 
 
