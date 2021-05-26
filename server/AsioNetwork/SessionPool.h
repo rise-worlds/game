@@ -10,19 +10,21 @@ class SessionList;
 class SessionPool
 {
 public:
-	SessionPool(boost::asio::io_service& ioservice, unsigned int nSize, unsigned int nSendBufferSize, unsigned int nRecvBufferSize, unsigned int nMaxPacketSize, unsigned int nTimeOutTick, unsigned int nIndexStart, bool bAcceptSocket);
-	~SessionPool();
+    SessionPool(boost::asio::io_service& ioservice, unsigned int nSize, unsigned int nSendBufferSize, unsigned int nRecvBufferSize,
+                unsigned int nMaxPacketSize, unsigned int nTimeOutTick, unsigned int nIndexStart, bool bAcceptSocket);
+    ~SessionPool();
 
-	Session*		Alloc();
-	void			Free(Session* pSession);
-	int				GetLength();
+    Session* Alloc();
+    void     Free(Session* pSession);
+    int      GetLength();
 
 private:
-	void			Create(boost::asio::io_service& ioservice, unsigned int nSize, unsigned int nSendBufferSize, unsigned int nRecvBufferSize, unsigned int nMaxPacketSize, unsigned int nTimeOutTick, unsigned int nIndexStart, bool bAcceptSocket);
+    void Create(boost::asio::io_service& ioservice, unsigned int nSize, unsigned int nSendBufferSize, unsigned int nRecvBufferSize,
+                unsigned int nMaxPacketSize, unsigned int nTimeOutTick, unsigned int nIndexStart, bool bAcceptSocket);
 
-	unsigned int	m_nMaxSize;
-	SessionList		*m_pList;
+    unsigned int m_nMaxSize;
+    SessionList* m_pList;
 };
 
 
-#endif // __SessionPool_H__
+#endif  // __SessionPool_H__

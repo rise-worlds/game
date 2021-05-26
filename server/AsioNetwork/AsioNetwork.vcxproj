@@ -91,7 +91,6 @@
     <ClInclude Include="Session.h" />
     <ClInclude Include="SessionList.h" />
     <ClInclude Include="SessionPool.h" />
-    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AsioNetwork.cpp" />
@@ -100,10 +99,6 @@
     <ClCompile Include="Session.cpp" />
     <ClCompile Include="SessionList.cpp" />
     <ClCompile Include="SessionPool.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
